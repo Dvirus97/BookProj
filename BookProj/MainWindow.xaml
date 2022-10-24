@@ -1,0 +1,87 @@
+﻿<Window
+    x:Class="BookProj.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:UC="clr-namespace:BookProj.UserControls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:BookProj"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="MainWindow"
+    Width="800"
+    Height="450"
+    FontFamily="Comic Sans MS"
+    mc:Ignorable="d">
+    <Grid>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
+            <Label Content="Book Store" FontSize="50" />
+            <TextBlock
+                FontSize="20"
+                Text="Log in"
+                TextAlignment="Center" />
+
+        </StackPanel>
+
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+
+            <Label Margin="3" Content="User Name:" />
+            <Border
+                Width="200"
+                Height="auto"
+                Margin="5"
+                BorderBrush="Black"
+                BorderThickness="2"
+                CornerRadius="8">
+
+                <TextBox
+                    x:Name="NameTbx"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Center"
+                    Background="Transparent"
+                    BorderBrush="Transparent" />
+
+            </Border>
+
+
+            <Label Margin="3" Content="Password:" />
+
+            <Border
+                Width="200"
+                Height="auto"
+                Margin="5"
+                BorderBrush="Black"
+                BorderThickness="2"
+                CornerRadius="8">
+
+                <PasswordBox
+                    x:Name="PasswordPass"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Center"
+                    Background="Transparent"
+                    BorderBrush="Transparent" />
+
+            </Border>
+
+            <!--<Border
+                Width="100"
+                Height="auto"
+                Margin="10"
+                BorderBrush="Black"
+                BorderThickness="2"
+                CornerRadius="8">
+
+                <Button
+                    VerticalAlignment="Center"
+                    Background="Transparent"
+                    BorderBrush="Transparent"
+                    Click="LogInBtn_Click"
+                    Content="Log In" />
+            </Border>-->
+            <UC:MyButton
+                Width="100"
+                Margin="10"
+                Click="LogInBtn_Click"
+                Text="Log In" />
+
+        </StackPanel>
+    </Grid>
+</Window>
