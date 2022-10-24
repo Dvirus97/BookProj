@@ -28,10 +28,10 @@
 
         <Border
             Grid.Row="1"
+            Grid.ColumnSpan="2"
             Width="auto"
-                Grid.ColumnSpan="2"
             Height="auto"
-            BorderBrush="Black"
+            Background="White"
             BorderThickness="2"
             CornerRadius="8">
             <TextBox

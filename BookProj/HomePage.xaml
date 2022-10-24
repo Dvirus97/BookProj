@@ -9,34 +9,49 @@
     Title="Home Page"
     d:DesignHeight="450"
     d:DesignWidth="800"
-    FontFamily="Comic Sans MS"
+    FontFamily="Century Gothic"
     mc:Ignorable="d">
 
 
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto" />
-            <ColumnDefinition Width="auto" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
 
-        <!--<Button
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Border
+                Grid.Column="2"
+                Margin="5"
+                Background="#FFE0EEF6"
+                BorderThickness="1"
+                CornerRadius="8" />
+            <!--<Button
             Grid.Column="0"
             Margin="5"
             VerticalAlignment="Top"
             Click="LogOutBtn_Click"
             Content="Log Out" />-->
-        <UC:MyButton
-            Margin="5"
-            VerticalAlignment="Top"
-            Click="LogOutBtn_Click"
-            Text="Log Out" />
 
-        <StackPanel Grid.Column="0" VerticalAlignment="Center">
-            <!--<Button
+
+            <Border
+                Margin="5"
+                VerticalAlignment="Top"
+                Background="#FFE0EEF6"
+                BorderThickness="1"
+                CornerRadius="8">
+                <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                    <!--<Button
                 x:Name="showAllBtn"
                 Margin="5"
-                BorderBrush="Black"
+
                 Click="FilterBtn_Click"
                 Content="show all"
                 FontSize="16" />
@@ -58,133 +73,173 @@
                 Click="FilterBtn_Click"
                 Content="show discount"
                 FontSize="16" />-->
-            <UC:MyButton
-                x:Name="showAllBtn"
-                Margin="5"
-                Click="FilterBtn_Click"
-                FontSize="16"
-                Text="Show All" />
-            <UC:MyButton
-                x:Name="showBooksBtn"
-                Margin="5"
-                Click="FilterBtn_Click"
-                FontSize="16"
-                Text="show books" />
-            <UC:MyButton
-                x:Name="showJournalsBtn"
-                Margin="5"
-                Click="FilterBtn_Click"
-                FontSize="16"
-                Text="show joutnals" />
-            <UC:MyButton
-                x:Name="showDiscountBtn"
-                Margin="5"
-                Click="FilterBtn_Click"
-                FontSize="16"
-                Text="show discount" />
-        </StackPanel>
+                    <Label Content="Sort By" FontSize="12" />
+                    <UC:MyButton
+                        x:Name="showAllBtn"
+                        Margin="5"
+                        Click="FilterBtn_Click"
+                        
+                        Text="Show All" />
+                    <UC:MyButton
+                        x:Name="showBooksBtn"
+                        Margin="5"
+                        Click="FilterBtn_Click"
+                        
+                        Text="show books" />
+                    <UC:MyButton
+                        x:Name="showJournalsBtn"
+                        Margin="5"
+                        Click="FilterBtn_Click"
+                        
+                        Text="show journals" />
+                    <UC:MyButton
+                        x:Name="showDiscountBtn"
+                        Margin="5"
+                        Click="FilterBtn_Click"
+                        
+                        Text="show discount" />
+                </StackPanel>
+            </Border>
 
-        <ListView
-            x:Name="listView"
-            Grid.Column="1"
-            ItemsSource="{Binding filter}"
-            SelectionChanged="listView_SelectionChanged">
-            <ListView.ItemTemplate>
-                <DataTemplate DataType="Models:Item">
-                    <Grid HorizontalAlignment="Stretch">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="50" />
-                            <ColumnDefinition Width="300" />
-                            <ColumnDefinition Width="auto" />
-                        </Grid.ColumnDefinitions>
-                        <Image
-                            Grid.Column="0"
-                            Height="30"
-                            Margin="5"
-                            Source="{Binding PhotoPath}" />
-                        <TextBlock
-                            Grid.Column="1"
-                            VerticalAlignment="Center"
-                            Text="{Binding HeadDetail}"
-                            TextWrapping="WrapWithOverflow" />
-                        <!--<StackPanel Grid.Column="0" Orientation="Horizontal">-->
-                        <!--<StackPanel Orientation="Horizontal" />
+            <Border
+                Grid.Column="1"
+                Margin="5"
+                Background="#FFE0EEF6"
+                BorderThickness="1"
+                CornerRadius="8">
+                <ListView
+                    BorderBrush="Transparent"
+                    x:Name="listView"
+                    Margin="4"
+                    Background="#FFE0EEF6"
+                    ItemsSource="{Binding filter}"
+                    SelectionChanged="listView_SelectionChanged">
+                    <ListView.ItemTemplate>
+                        <DataTemplate DataType="Models:Item">
+                            <Grid HorizontalAlignment="Stretch">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="50" />
+                                    <ColumnDefinition Width="300" />
+                                    <ColumnDefinition Width="auto" />
+                                </Grid.ColumnDefinitions>
+                                <Image
+                                    Grid.Column="0"
+                                    Height="30"
+                                    Margin="5"
+                                    Source="{Binding PhotoPath}" />
+                                <TextBlock
+                                    Grid.Column="1"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding HeadDetail}"
+                                    TextWrapping="WrapWithOverflow" />
+                                <!--<StackPanel Grid.Column="0" Orientation="Horizontal">-->
+                                <!--<StackPanel Orientation="Horizontal" />
                         <StackPanel Orientation="Horizontal" />
                         <StackPanel Orientation="Horizontal" />-->
 
-                        <!--<Label VerticalAlignment="Center" Content="{Binding Name}" />
+                                <!--<Label VerticalAlignment="Center" Content="{Binding Name}" />
                             <Label VerticalAlignment="Center" Content="Price:" />
                             <Label VerticalAlignment="Center" Content="{Binding Price}" />
                             <Label VerticalAlignment="Center" Content="discount:" />
                             <Label VerticalAlignment="Center" Content="{Binding Discount}" />-->
 
-                        <!--</StackPanel>-->
+                                <!--</StackPanel>-->
 
-                        <Label
-                            Grid.Column="2"
-                            HorizontalAlignment="Right"
-                            VerticalAlignment="Center">
-                            <StackPanel Orientation="Horizontal">
+                                <Label
+                                    Grid.Column="2"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center">
+                                    <StackPanel Orientation="Horizontal">
 
-                                <Button
-                                    Width="20"
-                                    Height="20"
-                                    VerticalAlignment="Center"
-                                    Background="Transparent"
-                                    BorderBrush="Transparent"
-                                    Click="MinusBtn_click"
-                                    Content="&#xE738;"
-                                    FontFamily="Segoe MDL2 Assets"
-                                    FontSize="15"
-                                    Tag="{Binding {}}" />
-                                <TextBlock
-                                    Margin="5"
-                                    FontSize="12"
-                                    Text="{Binding ShopCount}" />
-                                <Button
-                                    Width="20"
-                                    Height="20"
-                                    VerticalAlignment="Center"
-                                    Background="Transparent"
-                                    BorderBrush="Transparent"
-                                    Click="PlusBtn_click"
-                                    Content="&#xE710;"
-                                    FontFamily="Segoe MDL2 Assets"
-                                    FontSize="15"
-                                    Tag="{Binding {}}" />
-                            </StackPanel>
-                        </Label>
-                    </Grid>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+                                        <Button
+                                            Width="20"
+                                            Height="20"
+                                            VerticalAlignment="Center"
+                                            Background="Transparent"
+                                            BorderBrush="Transparent"
+                                            Click="MinusBtn_click"
+                                            Content="&#xE738;"
+                                            FontFamily="Segoe MDL2 Assets"
+                                            FontSize="15"
+                                            Tag="{Binding {}}" />
+                                        <TextBlock
+                                            Margin="5"
+                                            FontSize="12"
+                                            Text="{Binding ShopCount}" />
+                                        <Button
+                                            Width="20"
+                                            Height="20"
+                                            VerticalAlignment="Center"
+                                            Background="Transparent"
+                                            BorderBrush="Transparent"
+                                            Click="PlusBtn_click"
+                                            Content="&#xE710;"
+                                            FontFamily="Segoe MDL2 Assets"
+                                            FontSize="15"
+                                            Tag="{Binding {}}" />
+                                    </StackPanel>
+                                </Label>
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Border>
 
-        <Label
-            Name="DateilsLbl"
-            Grid.Column="2"
-            Margin="20" />
+            <Border
+                Grid.Column="2"
+                Margin="20"
+                VerticalAlignment="Top"
+                Background="White"
+                BorderThickness="1"
+                CornerRadius="8">
 
-        <StackPanel
-            Grid.Column="2"
-            Margin="5"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Bottom"
-            Orientation="Horizontal">
-            <StackPanel Orientation="Horizontal">
-                <!--<Button
+                <Label Name="DateilsLbl" Margin="5" />
+            </Border>
+
+            <StackPanel
+                Grid.Column="2"
+                Margin="5"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Bottom"
+                Orientation="Horizontal">
+                <StackPanel Orientation="Horizontal">
+                    <!--<Button
                     Width="70"
                     Margin="5"
                     Content="Sell"
                     FontSize="15" />-->
-                <UC:MyButton
-                    Width="70"
-                    Margin="5"
-                    Click="SellBtn_Click"
-                    Text="Sell" />
+                    <UC:MyButton
+                        Width="70"
+                        Margin="5"
+                        Click="SellBtn_Click"
+                        Text="Sell" />
+                </StackPanel>
+
+
             </StackPanel>
+        </Grid>
 
-
-            <StackPanel Name="AdminStackPanel" Orientation="Vertical">
+        <Border
+            Margin="5,5,30,5"
+            HorizontalAlignment="Left"
+            Background="#FFE0EEF6"
+            BorderThickness="1"
+            CornerRadius="8">
+            <UC:MyButton
+                Width="70"
+               Margin="5"
+                Click="LogOutBtn_Click"
+                Text="Log Out" />
+        </Border>
+        <Border
+            Name="AdminStackPanel"
+            Grid.Column="1"
+            Margin="5"
+            HorizontalAlignment="Center"
+            Background="#FFE0EEF6"
+            BorderThickness="1"
+            CornerRadius="8">
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                 <!--<Button
                     Style="{DynamicResource radius}"
                     Width="70"
@@ -207,7 +262,7 @@
                     Width="70"
                     Margin="5"
                     Click="EditBtn_Click"
-                    Text="Edit" />
+                    Text="Edit all" />
                 <UC:MyButton
                     Width="70"
                     Margin="5"
@@ -224,7 +279,6 @@
                     Click="DiscountsBtn_Click"
                     Text="Discounts" />
             </StackPanel>
-        </StackPanel>
-
+        </Border>
     </Grid>
 </Page>

@@ -49,11 +49,11 @@ namespace BookProj {
                     discountName = "sale";
                 }
                 else {
-                    discountName = discountNameTbx.Text;
+                    discountName = discountNameTbx.InputTbx.Text;
                 }
                 if (discountbyCmb.SelectedItem is not DiscountBy disBy) return;
 
-                double price = MyValidation.ValidInt(priceTbx.Text, "Discount Price");
+                double price = MyValidation.ValidInt(priceTbx.InputTbx.Text, "Discount Price");
 
                 DiscountManager.AllDiscounts.Add(new Discount(disBy, discountName, price));
                 screenLbl.Content = "new discount is added";

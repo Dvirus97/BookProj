@@ -84,7 +84,7 @@ namespace BookLib.Models {
 
 
         public override string ToString() {
-            return $"name: {Name}, \nauthor: {Author}, \npublisher: {Publisher}, \nprice: {Price:c}, \ngenre: {Genre}, \npublish date: {PublishDate:d}, \nedition: {Edition}, \namount: {Amount}, \ndiscount: {Discount}%, \naftre discount: {AfterDiscount}, \nisbn: {Isbn}";
+            return $"type: {this.GetType().Name}, \nname: {Name}, \nauthor: {Author}, \npublisher: {Publisher}, \nprice: {Price:c}, \ngenre: {Genre}, \npublish date: {PublishDate:d}, \nedition: {Edition}, \namount: {Amount}, \ndiscount: {Discount}%, \naftre discount: {AfterDiscount:c}, \nisbn: {Isbn}";
         }
 
         public string HeadDetail { get => $"name: {Name}, price: {Price}, discount: {Discount}%"; }

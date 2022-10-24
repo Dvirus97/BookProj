@@ -32,37 +32,59 @@ namespace BookProj {
             this.store = store;
             this.homePage = homePage;
             genreCbx.ItemsSource = store.GenreList;
+            itemTypeCmb.ItemsSource = store.ItemTypeList;
         }
 
         private void SaveBookBtn_Click(object sender, RoutedEventArgs e) {
             try {
-                Book book = new Book() {
+                if (itemTypeCmb.SelectedIndex == 0) {
+                    Book book = new Book() {
 
-                    Author = MyValidation.ValidString(authorITC.InputTbx.Text, "Autor"),
-                    Edition = MyValidation.ValidInt(editionITC.InputTbx.Text, "Edition"),
-                    Publisher = MyValidation.ValidString(publisherITC.InputTbx.Text, "Publisher"),
-                    Name = MyValidation.ValidString(nameITC.InputTbx.Text, "Name"),
-                    Price = MyValidation.ValidDouble(priceITC.InputTbx.Text, "Price"),
-                    Amount = MyValidation.ValidInt(quantityITC.InputTbx.Text, "Quantity"),
-                    Genre = (Genre)Enum.Parse(typeof(Genre), genreCbx.Text),
-                    PublishDate = MyValidation.ValidDate(PublishDateDP.SelectedDate, "publish Date"),
-                    //Discount = MyValidation.ValidDouble(discountITC.InputTbx.Text, "Discount"),
-                    //MyValidation.ValidDate(addDateDP.SelectedDate, "Add to store date")
+                        Author = MyValidation.ValidString(authorITC.InputTbx.Text, "Autor"),
+                        Edition = MyValidation.ValidInt(editionITC.InputTbx.Text, "Edition"),
+                        Publisher = MyValidation.ValidString(publisherITC.InputTbx.Text, "Publisher"),
+                        Name = MyValidation.ValidString(nameITC.InputTbx.Text, "Name"),
+                        Price = MyValidation.ValidDouble(priceITC.InputTbx.Text, "Price"),
+                        Amount = MyValidation.ValidInt(quantityITC.InputTbx.Text, "Quantity"),
+                        Genre = (Genre)Enum.Parse(typeof(Genre), genreCbx.Text),
+                        PublishDate = MyValidation.ValidDate(PublishDateDP.SelectedDate, "publish Date"),
+                        //Discount = MyValidation.ValidDouble(discountITC.InputTbx.Text, "Discount"),
+                        //MyValidation.ValidDate(addDateDP.SelectedDate, "Add to store date")
 
-                };
+                    };
+                    book.PhotoPath = photoPath is not null ? photoPath : "";
+                    this.photoPath = null;
+                    store?.Add(book);
+                }
+                if (itemTypeCmb.SelectedIndex == 1) {
+                    Journal journal = new Journal() {
 
-                book.PhotoPath = photoPath is not null ? photoPath : "";
-                this.photoPath = null;
+                        Author = MyValidation.ValidString(authorITC.InputTbx.Text, "Autor"),
+                        Edition = MyValidation.ValidInt(editionITC.InputTbx.Text, "Edition"),
+                        Publisher = MyValidation.ValidString(publisherITC.InputTbx.Text, "Publisher"),
+                        Name = MyValidation.ValidString(nameITC.InputTbx.Text, "Name"),
+                        Price = MyValidation.ValidDouble(priceITC.InputTbx.Text, "Price"),
+                        Amount = MyValidation.ValidInt(quantityITC.InputTbx.Text, "Quantity"),
+                        Genre = (Genre)Enum.Parse(typeof(Genre), genreCbx.Text),
+                        PublishDate = MyValidation.ValidDate(PublishDateDP.SelectedDate, "publish Date"),
+                        //Discount = MyValidation.ValidDouble(discountITC.InputTbx.Text, "Discount"),
+                        //MyValidation.ValidDate(addDateDP.SelectedDate, "Add to store date")
 
-                store?.Add(book);
+                    };
+                    journal.PhotoPath = photoPath is not null ? photoPath : "";
+                    this.photoPath = null;
+                    store?.Add(journal);
+                }
+
+
                 store?.Save();
                 homePage?.ResetView();
-                screenTbl.Text = "Book added and saved sucssesfuly";
+                screenTbl.Content = "Book added and saved sucssesfuly";
                 MessageBox.Show("Navigating Back..");
                 HomeWin.MainFrame?.GoBack();
             }
             catch (InvalidInputException ex) {
-                screenTbl.Text = $"{ex.Message} \n {ex.FailedProp}";
+                screenTbl.Content = $"{ex.Message} \n {ex.FailedProp}";
                 //store?.ErrorLog($"Book: {ex.Message} => {ex.FailedProp}", true);
                 //store?.LogErrorSave.SaveData($"{DateTime.Now} Book: {ex.Message} => {ex.FailedProp}", true);
                 //store?.ErrorLogSave.SaveData(ex, true);

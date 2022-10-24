@@ -12,8 +12,9 @@
     <Grid>
         <Border
             VerticalAlignment="Center"
-            BorderBrush="Black"
-            BorderThickness="2"
+            BorderBrush="White"
+            Background="White"
+            BorderThickness="1"
             CornerRadius="8">
 
             <Button

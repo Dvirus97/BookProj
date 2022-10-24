@@ -138,7 +138,12 @@ namespace BookProj {
         private void SellBtn_Click(object sender, RoutedEventArgs e) {
             for (int i = 0 ; i < store?.Count ; i++) {
                 store[i].Amount -= store[i].ShopCount;
-                store[i].ShopCount = 0;
+                if (store[i].Amount <= 0) {
+                    store.Remove(store[i]);
+                }
+                else {
+                    store[i].ShopCount = 0;
+                }
             }
             ResetView();
             //store?.Save();

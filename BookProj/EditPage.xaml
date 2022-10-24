@@ -10,21 +10,30 @@
     Title="Edit Page"
     d:DesignHeight="450"
     d:DesignWidth="800"
-    FontFamily="Comic Sans MS"
+    FontFamily="Century Gothic"
     mc:Ignorable="d">
 
     <Grid>
         <StackPanel>
-            <UC:MyButton
-                Height="30"
+
+            <Border
                 Margin="10"
                 HorizontalAlignment="Left"
-                Click="SaveBtn_Click"
-                FontSize="16"
-                FontWeight="Bold"
-                Text="Save Chainge" />
+                Background="#FFE0EEF6"
+                BorderThickness="1"
+                CornerRadius="8">
+                <UC:MyButton
+                    Height="30"
+                    Margin="5"
+                    HorizontalAlignment="Left"
+                    Click="SaveBtn_Click"
+                    FontSize="16"
+                    FontWeight="Bold"
+                    Text="Save Changes" />
+            </Border>
             <DataGrid
                 x:Name="dataGrid"
+                AlternatingRowBackground="#FFE0EEF6"
                 CanUserAddRows="False"
                 SelectionUnit="CellOrRowHeader" />
         </StackPanel>
