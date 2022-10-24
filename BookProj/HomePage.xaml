@@ -130,6 +130,8 @@
                                     Width="20"
                                     Height="20"
                                     VerticalAlignment="Center"
+                                    Background="Transparent"
+                                    BorderBrush="Transparent"
                                     Click="MinusBtn_click"
                                     Content="&#xE738;"
                                     FontFamily="Segoe MDL2 Assets"
@@ -143,6 +145,8 @@
                                     Width="20"
                                     Height="20"
                                     VerticalAlignment="Center"
+                                    Background="Transparent"
+                                    BorderBrush="Transparent"
                                     Click="PlusBtn_click"
                                     Content="&#xE710;"
                                     FontFamily="Segoe MDL2 Assets"
@@ -162,9 +166,10 @@
 
         <StackPanel
             Grid.Column="2"
-            Margin="5" Orientation="Horizontal"
+            Margin="5"
             HorizontalAlignment="Center"
-            VerticalAlignment="Bottom">
+            VerticalAlignment="Bottom"
+            Orientation="Horizontal">
             <StackPanel Orientation="Horizontal">
                 <!--<Button
                     Width="70"
@@ -174,6 +179,7 @@
                 <UC:MyButton
                     Width="70"
                     Margin="5"
+                    Click="SellBtn_Click"
                     Text="Sell" />
             </StackPanel>
 
@@ -212,11 +218,11 @@
                     Margin="5"
                     Click="AddNewItemBtn_Click"
                     Text="Add New" />
-                <UC:MyButton 
+                <UC:MyButton
                     Width="70"
                     Margin="5"
                     Click="DiscountsBtn_Click"
-                    Text="Discounts"/>
+                    Text="Discounts" />
             </StackPanel>
         </StackPanel>
 

@@ -134,5 +134,14 @@ namespace BookProj {
             if (HomeWin.MainFrame is null) return;
             HomeWin.MainFrame.Content = new DiscountsPage(store, this);
         }
+
+        private void SellBtn_Click(object sender, RoutedEventArgs e) {
+            for (int i = 0 ; i < store?.Count ; i++) {
+                store[i].Amount -= store[i].ShopCount;
+                store[i].ShopCount = 0;
+            }
+            ResetView();
+            //store?.Save();
+        }
     }
 }
