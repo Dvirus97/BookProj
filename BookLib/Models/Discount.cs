@@ -9,9 +9,6 @@ using System.Threading.Tasks;
 
 namespace BookLib.Models {
 
-    public enum DiscountBy {
-        Author, Publisher, Genre, AllStore
-    }
 
     public class Discount {
         public DiscountBy DiscountBy { get; set; }

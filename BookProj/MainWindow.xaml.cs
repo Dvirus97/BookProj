@@ -23,6 +23,10 @@ namespace BookProj {
         Store store = new Store();
         public MainWindow() {
             InitializeComponent();
+
+            var d1 = DateTime.Now.Date;
+            var d2 = new DateTime(2022, 10, 25);
+
         }
 
         private void LogInBtn_Click(object sender, RoutedEventArgs e) {

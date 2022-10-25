@@ -110,7 +110,7 @@
                 <ListView
                     BorderBrush="Transparent"
                     x:Name="listView"
-                    Margin="4"
+                    Margin="5"
                     Background="#FFE0EEF6"
                     ItemsSource="{Binding filter}"
                     SelectionChanged="listView_SelectionChanged">
@@ -278,6 +278,11 @@
                     Margin="5"
                     Click="DiscountsBtn_Click"
                     Text="Discounts" />
+                <UC:MyButton
+                    Width="70"
+                    Margin="5"
+                    Click="ReportsBtn_Click"
+                    Text="Reports" />
             </StackPanel>
         </Border>
     </Grid>

@@ -6,4 +6,13 @@
     public enum itemType {
         Book, Journal
     }
+
+    public enum DiscountBy {
+        Author, Publisher, Genre, AllStore
+    }
+
+    public enum FilterBy {
+        Undefine, All, Name, Author, Publisher, Genre, Item_Type
+    }
+
 }

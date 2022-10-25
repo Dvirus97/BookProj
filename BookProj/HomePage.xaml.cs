@@ -138,6 +138,20 @@ namespace BookProj {
         private void SellBtn_Click(object sender, RoutedEventArgs e) {
             for (int i = 0 ; i < store?.Count ; i++) {
                 store[i].Amount -= store[i].ShopCount;
+                if (store[i].ShopCount > 0) {
+                    Transaction tra = new Transaction() {
+                        Name = store[i].Name,
+                        Amount = store[i].ShopCount,
+                        Author = store[i].Author,
+                        Genre = store[i].Genre,
+                        Price = store[i].Price,
+                        Publisher = store[i].Publisher,
+                        PurchaseDate = DateTime.Now.Date,
+                        ItemType = store[i].GetType().Name
+                    };
+                    TransactionManager.AllTransactions.Add(tra);
+                    TransactionManager.Save();
+                }
                 if (store[i].Amount <= 0) {
                     store.Remove(store[i]);
                 }
@@ -147,6 +161,12 @@ namespace BookProj {
             }
             ResetView();
             //store?.Save();
+        }
+
+        private void ReportsBtn_Click(object sender, RoutedEventArgs e) {
+            if (store is null) return;
+            if (HomeWin.MainFrame is null) return;
+            HomeWin.MainFrame.Content = new ReportPage(store);
         }
     }
 }

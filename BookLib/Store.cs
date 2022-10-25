@@ -13,6 +13,11 @@ namespace BookLib {
         public List<Genre> GenreList { get => Enum.GetValues(typeof(Genre)).Cast<Genre>().ToList(); }
         public List<DiscountBy> DiscountByList { get => Enum.GetValues(typeof(DiscountBy)).Cast<DiscountBy>().ToList(); }
         public List<itemType> ItemTypeList { get => Enum.GetValues(typeof(itemType)).Cast<itemType>().ToList(); }
+        public List<FilterBy> FilterByList { get => Enum.GetValues(typeof(FilterBy)).Cast<FilterBy>().ToList(); }
+
+        public List<string> AllAuthor { get => (from x in items select x.Author).ToList(); }
+        public List<string> AllName { get => (from x in items select x.Name).ToList(); }
+        public List<string> AllPublisher { get => (from x in items select x.Publisher).ToList(); }
         public bool IsAdmin { get; set; } = true;
 
         public Store() {
@@ -51,10 +56,10 @@ namespace BookLib {
             return ((ICollection<Item>)items).Remove(item);
         }
 
+        #region Ilist
 
         public bool IsReadOnly => ((ICollection<Item>)items).IsReadOnly;
 
-        #region Ilist
 
         public void Clear() {
             ((ICollection<Item>)items).Clear();
