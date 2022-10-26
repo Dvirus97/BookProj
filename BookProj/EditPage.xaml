@@ -14,6 +14,11 @@
     mc:Ignorable="d">
 
     <Grid>
+        <Label
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            Content="Edit All"
+            FontSize="18" />
         <StackPanel>
 
             <Border

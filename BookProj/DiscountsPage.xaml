@@ -14,58 +14,67 @@
     mc:Ignorable="d">
 
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="1.8*" />
-        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
 
-
-        <Border
+        <Label
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            Content="Discounts"
+            FontSize="18" />
+        <Grid Grid.Row="1" Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="1.8*" />
+            </Grid.ColumnDefinitions>
+            <Border
             Margin="5"
             VerticalAlignment="Top"
             Background="#FFE0EEF6"
             BorderThickness="1"
             CornerRadius="8">
-            <StackPanel Margin="10">
-                <Label Margin="3" Content="Discount By" />
-                <ComboBox
+                <StackPanel Margin="10">
+                    <Label Margin="3" Content="Discount By" />
+                    <ComboBox
                     Name="discountbyCmb"
                     Margin="5"
                     SelectedIndex="0"
                     SelectionChanged="discountbyCmb_SelectionChanged" />
-                <StackPanel x:Name="notGenreSpl">
-                    <!--<Label Margin="3" Content="Discount Name" />-->
-                    <!--<TextBox x:Name="discountNameTbx" Margin="5" />-->
-                    <UC:InputTextControl
+                    <StackPanel x:Name="notGenreSpl">
+                        <!--<Label Margin="3" Content="Discount Name" />-->
+                        <!--<TextBox x:Name="discountNameTbx" Margin="5" />-->
+                        <UC:InputTextControl
                         x:Name="discountNameTbx"
                         Title="Discount Name"
                         MaxLength="20" />
-                </StackPanel>
-                <StackPanel x:Name="GenreSpl" Visibility="Collapsed">
-                    <Label Margin="3" Content="Discount Name" />
-                    <ComboBox x:Name="genreCmb" Margin="5" />
-                </StackPanel>
-                <!--<Label Margin="3" Content="Price" />
+                    </StackPanel>
+                    <StackPanel x:Name="GenreSpl" Visibility="Collapsed">
+                        <Label Margin="3" Content="Discount Name" />
+                        <ComboBox x:Name="genreCmb" Margin="5" />
+                    </StackPanel>
+                    <!--<Label Margin="3" Content="Price" />
                 <TextBox x:Name="priceTbx" Margin="5" />-->
-                <UC:InputTextControl
+                    <UC:InputTextControl
                     x:Name="priceTbx"
                     Title="Price"
                     MaxLength="10" />
-                <UC:MyButton
+                    <UC:MyButton
                     Width="150"
                     Margin="10,40,10,10"
                     Click="AddNewDiscoutnBtn_Click"
                     Text="Add new Discount" />
 
-                <UC:MyButton
+                    <UC:MyButton
                     Width="150"
                     Margin="10"
                     Click="RemoveDiscoutnBtn_Click"
                     Text="remove Discount" />
 
-                <!--<Label Name="screenLbl" Margin="20" />-->
+                    <!--<Label Name="screenLbl" Margin="20" />-->
 
-                <Border
+                    <Border
                     Grid.Column="1"
                     Margin="10"
                     VerticalAlignment="Top"
@@ -73,31 +82,32 @@
                     BorderThickness="1"
                     CornerRadius="8">
 
-                    <Label Name="screenLbl" Margin="5" />
-                </Border>
-            </StackPanel>
-        </Border>
+                        <Label Name="screenLbl" Margin="5" />
+                    </Border>
+                </StackPanel>
+            </Border>
 
 
-        <Border
+            <Border
             Grid.Column="1"
-            Margin="10"
+            Margin="5"
             Background="#FFE0EEF6"
             BorderThickness="1"
             CornerRadius="8">
-            <ListView
+                <ListView
                 x:Name="listView"
                 Margin="5"
                 Background="#FFE0EEF6"
                 BorderBrush="Transparent">
-                <ListView.ItemTemplate>
-                    <DataTemplate DataType="data:Discount">
-                        <StackPanel Orientation="Horizontal">
-                            <Label Margin="5" Content="{Binding {}}" />
-                        </StackPanel>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </Border>
+                    <ListView.ItemTemplate>
+                        <DataTemplate DataType="data:Discount">
+                            <StackPanel Orientation="Horizontal">
+                                <Label Margin="5" Content="{Binding {}}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Border>
+        </Grid>
     </Grid>
 </Page>

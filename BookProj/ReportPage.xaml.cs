@@ -42,29 +42,36 @@ namespace BookProj {
             if (fromDP.SelectedDate is not DateTime fromDate) return;
             if (tillDP.SelectedDate is not DateTime tillDate) return;
 
-            if (nameCmb.SelectedItem is null) return;
-
             var selectedEnum = (FilterBy)ByCmb.SelectedItem;
+
             switch (selectedEnum) {
-                case FilterBy.Undefine:
-                    break;
                 case FilterBy.All:
                     listView.ItemsSource = TransactionManager.FilterTransactions(fromDate, tillDate, x => true);
                     break;
                 case FilterBy.Name:
-                    listView.ItemsSource = TransactionManager.FilterTransactions(fromDate, tillDate, x => x.Name.Equals(nameCmb.SelectedItem.ToString()));
+                    if (nameCmb.SelectedItem is null) return;
+                    listView.ItemsSource = TransactionManager.FilterTransactions(fromDate, tillDate,
+                        x => x.Name is not null && x.Name.Equals(nameCmb.SelectedItem.ToString()));
                     break;
                 case FilterBy.Author:
-                    listView.ItemsSource = TransactionManager.FilterTransactions(fromDate, tillDate, x => x.Author.Equals(nameCmb.SelectedItem.ToString()));
+                    if (nameCmb.SelectedItem is null) return;
+                    listView.ItemsSource = TransactionManager.FilterTransactions(fromDate, tillDate,
+                        x => x.Author is not null && x.Author.Equals(nameCmb.SelectedItem.ToString()));
                     break;
                 case FilterBy.Publisher:
-                    listView.ItemsSource = TransactionManager.FilterTransactions(fromDate, tillDate, x => x.Publisher.Equals(nameCmb.SelectedItem.ToString()));
+                    if (nameCmb.SelectedItem is null) return;
+                    listView.ItemsSource = TransactionManager.FilterTransactions(fromDate, tillDate,
+                        x => x.Publisher is not null && x.Publisher.Equals(nameCmb.SelectedItem.ToString()));
                     break;
                 case FilterBy.Genre:
-                    listView.ItemsSource = TransactionManager.FilterTransactions(fromDate, tillDate, x => x.Genre.ToString().Equals(nameCmb.SelectedItem.ToString()));
+                    if (nameCmb.SelectedItem is null) return;
+                    listView.ItemsSource = TransactionManager.FilterTransactions(fromDate, tillDate,
+                        x => x.Genre.ToString().Equals(nameCmb.SelectedItem.ToString()));
                     break;
                 case FilterBy.Item_Type:
-                    listView.ItemsSource = TransactionManager.FilterTransactions(fromDate, tillDate, x => x.ItemType.Equals(nameCmb.SelectedItem.ToString()));
+                    if (nameCmb.SelectedItem is null) return;
+                    listView.ItemsSource = TransactionManager.FilterTransactions(fromDate, tillDate,
+                        x => x.ItemType.Equals(nameCmb.SelectedItem.ToString()));
                     break;
                 default:
                     break;
@@ -73,11 +80,9 @@ namespace BookProj {
 
         private void ByCmb_SelectionChanged(object sender, SelectionChangedEventArgs e) {
             FilterBy selectedEnum = (FilterBy)ByCmb.SelectedItem;
-
             nameSpnl.Visibility = Visibility.Visible;
 
             switch (selectedEnum) {
-                case FilterBy.Undefine:
                 case FilterBy.All:
                     nameSpnl.Visibility = Visibility.Collapsed;
                     break;

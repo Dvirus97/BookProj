@@ -12,7 +12,7 @@
     }
 
     public enum FilterBy {
-        Undefine, All, Name, Author, Publisher, Genre, Item_Type
+        All, Name, Author, Publisher, Genre, Item_Type
     }
 
 }

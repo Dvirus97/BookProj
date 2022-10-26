@@ -8,63 +8,78 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="ReportPage"
     d:DesignHeight="450"
-    FontFamily="Century Gothic"
-    
     d:DesignWidth="800"
+    FontFamily="Century Gothic"
     mc:Ignorable="d">
 
     <Grid Margin="5">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto" />
-            <ColumnDefinition />
-        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Label
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            Content="Reports"
+            FontSize="18" />
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
 
 
-        <Border
-            Grid.Column="0"
-            Margin="5"
-            VerticalAlignment="Center"
-            Background="#FFE0EEF6"
-            BorderThickness="1"
-            CornerRadius="8">
-            <StackPanel Margin="5" VerticalAlignment="Center">
-
-                <Label Margin="5" Content="from:" />
-                <DatePicker Name="fromDP" Margin="5" />
-                <Label Margin="5" Content="till:" />
-                <DatePicker Name="tillDP" Margin="5" />
-                <Label Content="by:" />
-                <ComboBox
-                    Name="ByCmb"
-                    Margin="5"
-                    SelectedIndex="0"
-                    SelectionChanged="ByCmb_SelectionChanged" />
-
-                <StackPanel Name="nameSpnl">
-                    <Label Margin="5" Content="Name" />
-                    <ComboBox x:Name="nameCmb" Margin="5" />
-                </StackPanel>
-
-                <UC:MyButton
-                    Margin="5"
-                    Click="SerchBtn_Click"
-                    Text="Serch" />
-
-            </StackPanel>
-        </Border>
-
-        <Border
-            Name="AdminStackPanel"
-            Grid.Column="1"
-            Margin="5"
-            Background="#FFE0EEF6"
-            BorderThickness="1"
-            CornerRadius="8">
-            <ListView
-            x:Name="listView"
-                BorderBrush="Transparent"
+            <Border
+                Grid.Column="0"
+                Margin="5"
+                VerticalAlignment="Top"
                 Background="#FFE0EEF6"
-            Margin="5" />
-        </Border>
+                BorderThickness="1"
+                CornerRadius="8">
+                <StackPanel Margin="5" VerticalAlignment="Center">
+
+                    <Label Margin="5" Content="from:" />
+                    <DatePicker Name="fromDP" Margin="5" />
+                    <Label Margin="5" Content="till:" />
+                    <DatePicker Name="tillDP" Margin="5" />
+                    <Label Content="by:" />
+                    <ComboBox
+                        Name="ByCmb"
+                        Margin="5"
+                        SelectedIndex="0"
+                        SelectionChanged="ByCmb_SelectionChanged" />
+
+                    <StackPanel Name="nameSpnl">
+                        <Label Margin="5" Content="Name" />
+                        <ComboBox
+                            x:Name="nameCmb"
+                            Margin="5"
+                            SelectedIndex="0" />
+                    </StackPanel>
+
+                    <UC:MyButton
+                        Margin="5"
+                        Click="SerchBtn_Click"
+                        Text="Serch" />
+
+                </StackPanel>
+            </Border>
+
+            <Border
+                Name="AdminStackPanel"
+                Grid.Column="1"
+                Margin="5"
+                Background="#FFE0EEF6"
+                BorderThickness="1"
+                CornerRadius="8">
+                <ListView
+                    x:Name="listView"
+                    Margin="5"
+                    Background="#FFE0EEF6"
+                    BorderBrush="Transparent" />
+            </Border>
+        </Grid>
     </Grid>
 </Page>

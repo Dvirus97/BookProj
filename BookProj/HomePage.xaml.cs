@@ -159,6 +159,7 @@ namespace BookProj {
                     store[i].ShopCount = 0;
                 }
             }
+            MessageBox.Show("All Sopping Cart Has bin bought. ");
             ResetView();
             //store?.Save();
         }
