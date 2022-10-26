@@ -19,20 +19,19 @@ namespace BookProj {
     /// Interaction logic for EditPage.xaml
     /// </summary>
     public partial class EditPage : Page {
-        private readonly Store? store;
         private readonly HomePage? homePage;
 
         public EditPage() {
             InitializeComponent();
         }
-        public EditPage(Store store, HomePage homePage) : this() {
-            this.store = store;
+        public EditPage(/*Store store,*/ HomePage homePage) : this() {
+            //this.store = store;
             this.homePage = homePage;
-            dataGrid.ItemsSource = store.items;
+            dataGrid.ItemsSource = Store.store.items;
         }
 
         private void SaveBtn_Click(object sender, RoutedEventArgs e) {
-            store?.Save();
+            Store.store?.Save();
             homePage?.ResetView();
         }
     }

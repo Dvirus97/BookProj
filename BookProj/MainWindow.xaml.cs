@@ -20,7 +20,6 @@ namespace BookProj {
     /// </summary>
     public partial class MainWindow : Window {
 
-        Store store = new Store();
         public MainWindow() {
             InitializeComponent();
 
@@ -36,12 +35,12 @@ namespace BookProj {
 
             //if (user.UserName.Equals(NameTbx.Text.ToLower()) &&
             //    user.Password.Equals(PasswordPass.Password.ToLower())) {
-            //    store.IsAdmin = false;
+            //    Store.store.IsAdmin = false;
             //    isLogIn = true;
             //}
             //else if (Admin.UserName.Equals(NameTbx.Text.ToLower()) &&
             //    Admin.Password.Equals(PasswordPass.Password.ToLower())) {
-            //    store.IsAdmin = true;
+            //    Store.store.IsAdmin = true;
             //    isLogIn = true;
             //}
             //else {
@@ -50,7 +49,7 @@ namespace BookProj {
             //}
 
             if (isLogIn) {
-                HomeWin homeWin = new HomeWin(store);
+                HomeWin homeWin = new HomeWin();
                 homeWin.Show();
                 this.Close();
             }

@@ -21,7 +21,6 @@ namespace BookProj {
     /// Interaction logic for DiscountsPage.xaml
     /// </summary>
     public partial class DiscountsPage : Page {
-        private readonly Store? store;
         private readonly HomePage? homePage;
         bool isGenre;
         private bool isAll;
@@ -30,12 +29,12 @@ namespace BookProj {
             InitializeComponent();
         }
 
-        public DiscountsPage(Store store, HomePage homePage) : this() {
-            this.store = store;
+        public DiscountsPage(HomePage homePage) : this() {
+
             this.homePage = homePage;
-            discountbyCmb.ItemsSource = store.DiscountByList;
-            genreCmb.ItemsSource = store.GenreList;
-            listView.ItemsSource = DiscountManager.AllDiscounts;
+            discountbyCmb.ItemsSource = Store.store.DiscountByList;
+            genreCmb.ItemsSource = Store.store.GenreList;
+            listView.ItemsSource = DiscountManager.DM.AllDiscounts;
         }
 
         private void AddNewDiscoutnBtn_Click(object sender, RoutedEventArgs e) {
@@ -55,9 +54,9 @@ namespace BookProj {
 
                 double price = MyValidation.ValidInt(priceTbx.InputTbx.Text, "Discount Price");
 
-                DiscountManager.AllDiscounts.Add(new Discount(disBy, discountName, price));
+                DiscountManager.DM.AllDiscounts.Add(new Discount(disBy, discountName, price));
                 screenLbl.Content = "new discount is added";
-                DiscountManager.Save();
+                DiscountManager.DM.Save();
             }
             catch (InvalidInputException ex) {
                 screenLbl.Content = $"{ex.Message} \n {ex.FailedProp}";
@@ -90,8 +89,8 @@ namespace BookProj {
         private void RemoveDiscoutnBtn_Click(object sender, RoutedEventArgs e) {
             if (listView.SelectedItem is not Discount dis) return;
 
-            DiscountManager.AllDiscounts.Remove(dis);
-            DiscountManager.Save();
+            DiscountManager.DM.AllDiscounts.Remove(dis);
+            DiscountManager.DM.Save();
         }
     }
 }

@@ -33,12 +33,7 @@
                 Background="#FFE0EEF6"
                 BorderThickness="1"
                 CornerRadius="8" />
-            <!--<Button
-            Grid.Column="0"
-            Margin="5"
-            VerticalAlignment="Top"
-            Click="LogOutBtn_Click"
-            Content="Log Out" />-->
+
 
 
             <Border
@@ -48,31 +43,7 @@
                 BorderThickness="1"
                 CornerRadius="8">
                 <StackPanel Grid.Column="0" VerticalAlignment="Center">
-                    <!--<Button
-                x:Name="showAllBtn"
-                Margin="5"
 
-                Click="FilterBtn_Click"
-                Content="show all"
-                FontSize="16" />
-            <Button
-                x:Name="showBooksBtn"
-                Margin="5"
-                Click="FilterBtn_Click"
-                Content="show books"
-                FontSize="16" />
-            <Button
-                x:Name="showJournalsBtn"
-                Margin="5"
-                Click="FilterBtn_Click"
-                Content="show joutnals"
-                FontSize="16" />
-            <Button
-                x:Name="showDiscountBtn"
-                Margin="5"
-                Click="FilterBtn_Click"
-                Content="show discount"
-                FontSize="16" />-->
                     <Label Content="Sort By" FontSize="12" />
                     <UC:MyButton
                         x:Name="showAllBtn"
@@ -132,18 +103,6 @@
                                     VerticalAlignment="Center"
                                     Text="{Binding HeadDetail}"
                                     TextWrapping="WrapWithOverflow" />
-                                <!--<StackPanel Grid.Column="0" Orientation="Horizontal">-->
-                                <!--<StackPanel Orientation="Horizontal" />
-                        <StackPanel Orientation="Horizontal" />
-                        <StackPanel Orientation="Horizontal" />-->
-
-                                <!--<Label VerticalAlignment="Center" Content="{Binding Name}" />
-                            <Label VerticalAlignment="Center" Content="Price:" />
-                            <Label VerticalAlignment="Center" Content="{Binding Price}" />
-                            <Label VerticalAlignment="Center" Content="discount:" />
-                            <Label VerticalAlignment="Center" Content="{Binding Discount}" />-->
-
-                                <!--</StackPanel>-->
 
                                 <Label
                                     Grid.Column="2"
@@ -203,11 +162,7 @@
                 VerticalAlignment="Bottom"
                 Orientation="Horizontal">
                 <StackPanel Orientation="Horizontal">
-                    <!--<Button
-                    Width="70"
-                    Margin="5"
-                    Content="Sell"
-                    FontSize="15" />-->
+
                     <UC:MyButton
                         Width="70"
                         Margin="5"
@@ -240,24 +195,7 @@
             BorderThickness="1"
             CornerRadius="8">
             <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                <!--<Button
-                    Style="{DynamicResource radius}"
-                    Width="70"
-                    Margin="5"
-                    Click="EditBtn_Click"
-                    Content="Edit"
-                    FontSize="15" />-->
-                <!--<Button
-                    Width="70"
-                    Margin="5"
-                    Click="RemoveBtn_Click"
-                    Content="Remove"
-                    FontSize="15" />
-                <Button
-                    Width="70"
-                    Margin="5"
-                    Content="Add New"
-                    FontSize="15" />-->
+
                 <UC:MyButton
                     Width="70"
                     Margin="5"

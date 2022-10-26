@@ -2,9 +2,12 @@
 using DbService;
 using System.Collections;
 using System.Collections.ObjectModel;
+using System.Globalization;
 
 namespace BookLib {
     public class Store : IList<Item>, IEnumerable<Item> {
+
+        public static Store store = new Store();
 
         public List<Item> items = new List<Item>();
         JsonSave<Item> LogItemsList = new JsonSave<Item>("LogItemsList.json");
@@ -20,10 +23,9 @@ namespace BookLib {
         public List<string> AllPublisher { get => (from x in items select x.Publisher).ToList(); }
         public bool IsAdmin { get; set; } = true;
 
-        public Store() {
+        private Store() {
             //CreateTempList();
             items = LogItemsList.GetData();
-            DiscountManager.Load();
         }
 
         void CreateTempList() {

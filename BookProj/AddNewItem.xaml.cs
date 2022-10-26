@@ -22,17 +22,17 @@ namespace BookProj {
     /// Interaction logic for AddNewItem.xaml
     /// </summary>
     public partial class AddNewItem : Page {
-        private readonly Store? store;
+        //private readonly Store? Store.instanc;
         private readonly HomePage? homePage;
         string? photoPath;
         public AddNewItem() {
             InitializeComponent();
         }
-        public AddNewItem(Store store, HomePage homePage) : this() {
-            this.store = store;
+        public AddNewItem(/*Store Store.instanc,*/ HomePage homePage) : this() {
+            //this.Store.instanc = Store.instanc;
             this.homePage = homePage;
-            genreCbx.ItemsSource = store.GenreList;
-            itemTypeCmb.ItemsSource = store.ItemTypeList;
+            genreCbx.ItemsSource = Store.store.GenreList;
+            itemTypeCmb.ItemsSource = Store.store.ItemTypeList;
         }
 
         private void SaveBookBtn_Click(object sender, RoutedEventArgs e) {
@@ -49,12 +49,12 @@ namespace BookProj {
                         Genre = (Genre)Enum.Parse(typeof(Genre), genreCbx.Text),
                         PublishDate = MyValidation.ValidDate(PublishDateDP.SelectedDate, "publish Date"),
                         //Discount = MyValidation.ValidDouble(discountITC.InputTbx.Text, "Discount"),
-                        //MyValidation.ValidDate(addDateDP.SelectedDate, "Add to store date")
+                        //MyValidation.ValidDate(addDateDP.SelectedDate, "Add to Store.instanc date")
 
                     };
                     book.PhotoPath = photoPath is not null ? photoPath : "";
                     this.photoPath = null;
-                    store?.Add(book);
+                    Store.store?.Add(book);
                 }
                 if (itemTypeCmb.SelectedIndex == 1) {
                     Journal journal = new Journal() {
@@ -68,16 +68,16 @@ namespace BookProj {
                         Genre = (Genre)Enum.Parse(typeof(Genre), genreCbx.Text),
                         PublishDate = MyValidation.ValidDate(PublishDateDP.SelectedDate, "publish Date"),
                         //Discount = MyValidation.ValidDouble(discountITC.InputTbx.Text, "Discount"),
-                        //MyValidation.ValidDate(addDateDP.SelectedDate, "Add to store date")
+                        //MyValidation.ValidDate(addDateDP.SelectedDate, "Add to Store.instanc date")
 
                     };
                     journal.PhotoPath = photoPath is not null ? photoPath : "";
                     this.photoPath = null;
-                    store?.Add(journal);
+                    Store.store?.Add(journal);
                 }
 
 
-                store?.Save();
+                Store.store?.Save();
                 homePage?.ResetView();
                 screenTbl.Content = "Book added and saved sucssesfuly";
                 MessageBox.Show("Navigating Back..");
@@ -85,9 +85,9 @@ namespace BookProj {
             }
             catch (InvalidInputException ex) {
                 screenTbl.Content = $"{ex.Message} \n {ex.FailedProp}";
-                //store?.ErrorLog($"Book: {ex.Message} => {ex.FailedProp}", true);
-                //store?.LogErrorSave.SaveData($"{DateTime.Now} Book: {ex.Message} => {ex.FailedProp}", true);
-                //store?.ErrorLogSave.SaveData(ex, true);
+                //Store.instanc?.ErrorLog($"Book: {ex.Message} => {ex.FailedProp}", true);
+                //Store.instanc?.LogErrorSave.SaveData($"{DateTime.Now} Book: {ex.Message} => {ex.FailedProp}", true);
+                //Store.instanc?.ErrorLogSave.SaveData(ex, true);
             }
             catch (ArgumentNullException ex) {
 

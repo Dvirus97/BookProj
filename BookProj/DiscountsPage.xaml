@@ -43,8 +43,7 @@
                     SelectedIndex="0"
                     SelectionChanged="discountbyCmb_SelectionChanged" />
                     <StackPanel x:Name="notGenreSpl">
-                        <!--<Label Margin="3" Content="Discount Name" />-->
-                        <!--<TextBox x:Name="discountNameTbx" Margin="5" />-->
+
                         <UC:InputTextControl
                         x:Name="discountNameTbx"
                         Title="Discount Name"
@@ -54,8 +53,7 @@
                         <Label Margin="3" Content="Discount Name" />
                         <ComboBox x:Name="genreCmb" Margin="5" />
                     </StackPanel>
-                    <!--<Label Margin="3" Content="Price" />
-                <TextBox x:Name="priceTbx" Margin="5" />-->
+
                     <UC:InputTextControl
                     x:Name="priceTbx"
                     Title="Price"
@@ -72,7 +70,6 @@
                     Click="RemoveDiscoutnBtn_Click"
                     Text="remove Discount" />
 
-                    <!--<Label Name="screenLbl" Margin="20" />-->
 
                     <Border
                     Grid.Column="1"

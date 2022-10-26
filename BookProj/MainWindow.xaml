@@ -71,21 +71,7 @@
 
                 </Border>
 
-                <!--<Border
-                Width="100"
-                Height="auto"
-                Margin="10"
-                BorderBrush="Black"
-                BorderThickness="2"
-                CornerRadius="8">
 
-                <Button
-                    VerticalAlignment="Center"
-                    Background="Transparent"
-                    BorderBrush="Transparent"
-                    Click="LogInBtn_Click"
-                    Content="Log In" />
-            </Border>-->
                 <Border
                     Margin="5"
                     HorizontalAlignment="Center"

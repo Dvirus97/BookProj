@@ -19,7 +19,7 @@ namespace BookLib.Models {
         public double Price { get; set; }
         public Genre Genre { get; set; }
         public int Amount { get; set; }
-        public string ItemType { get; set; }
+        public string? ItemType { get; set; }
         public DateTime PurchaseDate { get; set; }
 
         public override string ToString() {
@@ -30,24 +30,26 @@ namespace BookLib.Models {
 
 
 
-    public static class TransactionManager {
+    public class TransactionManager {
 
-        public static List<Transaction> AllTransactions { get; set; } = new List<Transaction>();
-        static JsonSave<Transaction> LogTransactionsList = new JsonSave<Transaction>("LogTransactionsList.json");
+        public static TransactionManager TM = new TransactionManager();
+        public List<Transaction> AllTransactions { get; set; } = new List<Transaction>();
+        JsonSave<Transaction> LogTransactionsList = new JsonSave<Transaction>("LogTransactionsList.json");
 
-        static TransactionManager() {
+
+        private TransactionManager() {
             Load();
         }
 
-        public static void Save() {
+        public void Save() {
             LogTransactionsList.SaveData(AllTransactions);
         }
 
-        public static void Load() {
+        public void Load() {
             AllTransactions = LogTransactionsList.GetData();
         }
 
-        public static IEnumerable<Transaction> FilterTransactions(DateTime FromDate, DateTime tillDate, Predicate<Transaction> byItem) {
+        public IEnumerable<Transaction> FilterTransactions(DateTime FromDate, DateTime tillDate, Predicate<Transaction> byItem) {
             return from x in AllTransactions where (x.PurchaseDate.Date <= tillDate && x.PurchaseDate.Date >= FromDate && byItem.Invoke(x)) select x;
         }
 

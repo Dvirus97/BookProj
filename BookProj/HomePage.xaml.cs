@@ -22,7 +22,6 @@ namespace BookProj {
     /// </summary>
     public partial class HomePage : Page {
         public List<Item> filter = new List<Item>();
-        Store? store;
         private readonly HomeWin? homeWin;
         Predicate<Item>? predicate;
         Item? selectedItem;
@@ -31,11 +30,10 @@ namespace BookProj {
             InitializeComponent();
             listView.DataContext = this;
         }
-        public HomePage(Store store, HomeWin homeWin) : this() {
-            this.store = store;
+        public HomePage(HomeWin homeWin) : this() {
             this.homeWin = homeWin;
 
-            switch (store.IsAdmin) {
+            switch (Store.store.IsAdmin) {
                 case true:
                     AdminStackPanel.Visibility = Visibility.Visible;
                     break;
@@ -45,7 +43,7 @@ namespace BookProj {
                 default:
             }
             predicate = x => true;
-            filter = store.FilterList(predicate);
+            filter = Store.store.FilterList(predicate);
             ResetView();
             SetButtons();
             listView.ItemsSource = filter;
@@ -61,7 +59,7 @@ namespace BookProj {
         public void ResetView() {
             if (predicate is null) return;
 
-            List<Item>? temp = store?.FilterList(predicate);
+            List<Item>? temp = Store.store?.FilterList(predicate);
             if (temp is not null)
                 filter = temp;
             listView.ItemsSource = filter;
@@ -73,7 +71,6 @@ namespace BookProj {
             if (listView.SelectedItem is not Item item) return;
             this.selectedItem = item;
             ResetView();
-            //DateilsLbl.Content = item.ToString();
         }
 
         private void PlusBtn_click(object sender, RoutedEventArgs e) {
@@ -105,9 +102,8 @@ namespace BookProj {
         }
 
         private void EditBtn_Click(object sender, RoutedEventArgs e) {
-            if (store is null) return;
             if (HomeWin.MainFrame is null) return;
-            HomeWin.MainFrame.Content = new EditPage(store, this);
+            HomeWin.MainFrame.Content = new EditPage(this);
         }
 
         private void LogOutBtn_Click(object sender, RoutedEventArgs e) {
@@ -118,56 +114,52 @@ namespace BookProj {
 
         private void RemoveBtn_Click(object sender, RoutedEventArgs e) {
             if (listView.SelectedItem is not Item item) return;
-            store?.Remove(item);
+            Store.store?.Remove(item);
             ResetView();
-            //store.Save();
         }
 
         private void AddNewItemBtn_Click(object sender, RoutedEventArgs e) {
-            if (store is null) return;
             if (HomeWin.MainFrame is null) return;
-            HomeWin.MainFrame.Content = new AddNewItem(store, this);
+            HomeWin.MainFrame.Content = new AddNewItem(this);
         }
 
         private void DiscountsBtn_Click(object sender, RoutedEventArgs e) {
-            if (store is null) return;
             if (HomeWin.MainFrame is null) return;
-            HomeWin.MainFrame.Content = new DiscountsPage(store, this);
+            HomeWin.MainFrame.Content = new DiscountsPage(this);
         }
 
         private void SellBtn_Click(object sender, RoutedEventArgs e) {
-            for (int i = 0 ; i < store?.Count ; i++) {
-                store[i].Amount -= store[i].ShopCount;
-                if (store[i].ShopCount > 0) {
+            for (int i = 0 ; i < Store.store?.Count ; i++) {
+                Store.store[i].Amount -= Store.store[i].ShopCount;
+                if (Store.store[i].ShopCount > 0) {
                     Transaction tra = new Transaction() {
-                        Name = store[i].Name,
-                        Amount = store[i].ShopCount,
-                        Author = store[i].Author,
-                        Genre = store[i].Genre,
-                        Price = store[i].Price,
-                        Publisher = store[i].Publisher,
+                        Name = Store.store[i].Name,
+                        Amount = Store.store[i].ShopCount,
+                        Author = Store.store[i].Author,
+                        Genre = Store.store[i].Genre,
+                        Price = Store.store[i].Price,
+                        Publisher = Store.store[i].Publisher,
                         PurchaseDate = DateTime.Now.Date,
-                        ItemType = store[i].GetType().Name
+                        ItemType = Store.store[i].GetType().Name
                     };
-                    TransactionManager.AllTransactions.Add(tra);
-                    TransactionManager.Save();
+                    TransactionManager.TM.AllTransactions.Add(tra);
+                    TransactionManager.TM.Save();
                 }
-                if (store[i].Amount <= 0) {
-                    store.Remove(store[i]);
+                if (Store.store[i].Amount <= 0) {
+                    Store.store.Remove(Store.store[i]);
                 }
                 else {
-                    store[i].ShopCount = 0;
+                    Store.store[i].ShopCount = 0;
                 }
             }
             MessageBox.Show("All Sopping Cart Has bin bought. ");
             ResetView();
-            //store?.Save();
+            //Store.instanc?.Save();
         }
 
         private void ReportsBtn_Click(object sender, RoutedEventArgs e) {
-            if (store is null) return;
             if (HomeWin.MainFrame is null) return;
-            HomeWin.MainFrame.Content = new ReportPage(store);
+            HomeWin.MainFrame.Content = new ReportPage();
         }
     }
 }

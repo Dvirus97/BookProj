@@ -15,8 +15,8 @@
     <Grid Grid.IsSharedSizeScope="True">
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition/>
+            <RowDefinition Height="auto" />
+            <RowDefinition />
         </Grid.RowDefinitions>
 
         <Label
@@ -40,12 +40,7 @@
                     Background="#FFE0EEF6"
                     BorderBrush="Transparent">
                     <ListViewItem>
-                        <!--<Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition SharedSizeGroup="lable" />
-                        <ColumnDefinition />
-                    </Grid.ColumnDefinitions>
-                </Grid>-->
+
                         <StackPanel>
 
                             <TextBlock Grid.Column="0" Margin="5">item type:</TextBlock>
@@ -60,38 +55,15 @@
                     </ListViewItem>
 
                     <ListViewItem>
-                        <!--<Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition SharedSizeGroup="lable" />
-                        <ColumnDefinition />
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Column="0" Margin="5">Author:</TextBlock>
-                    <TextBox
-                        x:Name="authorTbx"
-                        Grid.Column="1"
-                        MinWidth="100"
-                        Margin="5" />-->
                         <UC:InputTextControl
                             x:Name="authorITC"
                             Title="Author"
                             Width="300"
                             Margin="5"
                             MaxLength="50" />
-                        <!--</Grid>-->
                     </ListViewItem>
+
                     <ListViewItem>
-                        <!--<Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition SharedSizeGroup="lable" />
-                        <ColumnDefinition />
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Column="0" Margin="5">Edition:</TextBlock>
-                    <TextBox
-                        x:Name="editionTbx"
-                        Grid.Column="1"
-                        MinWidth="100"
-                        Margin="5" />
-                </Grid>-->
                         <UC:InputTextControl
                             x:Name="editionITC"
                             Title="Edition"
@@ -99,41 +71,8 @@
                             Margin="5"
                             MaxLength="50" />
                     </ListViewItem>
-                    <!--<ListViewItem>
-                    -->
-                    <!--<Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition SharedSizeGroup="lable" />
-                        <ColumnDefinition />
-                    </Grid.ColumnDefinitions>-->
-                    <!--
-                <StackPanel>
 
-                    <TextBlock Grid.Column="0" Margin="5">Print Date:</TextBlock>
-                    <DatePicker
-                        x:Name="printDateDP"
-                        Grid.Column="1"
-                        Width="300"
-                        MinWidth="100"
-                        Margin="5" />
-                </StackPanel>
-                    -->
-                    <!--</Grid>-->
-                    <!--
-            </ListViewItem>-->
                     <ListViewItem>
-                        <!--<Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition SharedSizeGroup="lable" />
-                        <ColumnDefinition />
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Column="0" Margin="5">Publisher:</TextBlock>
-                    <TextBox
-                        x:Name="publisherTbx"
-                        Grid.Column="1"
-                        MinWidth="100"
-                        Margin="5" />
-                </Grid>-->
                         <UC:InputTextControl
                             x:Name="publisherITC"
                             Title="Publisher"
@@ -143,18 +82,6 @@
                     </ListViewItem>
 
                     <ListViewItem>
-                        <!--<Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition SharedSizeGroup="lable" />
-                        <ColumnDefinition />
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Column="0" Margin="5">Name:</TextBlock>
-                    <TextBox
-                        x:Name="nameTbx"
-                        Grid.Column="1"
-                        MinWidth="100"
-                        Margin="5" />
-                </Grid>-->
                         <UC:InputTextControl
                             x:Name="nameITC"
                             Title="Name"
@@ -164,18 +91,6 @@
                     </ListViewItem>
 
                     <ListViewItem>
-                        <!--<Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition SharedSizeGroup="lable" />
-                        <ColumnDefinition />
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Column="0" Margin="5">Price:</TextBlock>
-                    <TextBox
-                        x:Name="priceTbx"
-                        Grid.Column="1"
-                        MinWidth="100"
-                        Margin="5" />
-                </Grid>-->
                         <UC:InputTextControl
                             x:Name="priceITC"
                             Title="Price"
@@ -183,19 +98,8 @@
                             Margin="5"
                             MaxLength="50" />
                     </ListViewItem>
+
                     <ListViewItem>
-                        <!--<Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition SharedSizeGroup="lable" />
-                        <ColumnDefinition />
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Column="0" Margin="5">Quantity:</TextBlock>
-                    <TextBox
-                        x:Name="countTbx"
-                        Grid.Column="1"
-                        MinWidth="100"
-                        Margin="5" />
-                </Grid>-->
                         <UC:InputTextControl
                             x:Name="quantityITC"
                             Title="Quantity"
@@ -204,38 +108,9 @@
                             MaxLength="50" />
                     </ListViewItem>
 
-                    <!--<ListViewItem>
-                    -->
-                    <!--<Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition SharedSizeGroup="lable" />
-                        <ColumnDefinition />
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Column="0" Margin="5">Discount:</TextBlock>
-                    <TextBox
-                        x:Name="discountTbx"
-                        Grid.Column="1"
-                        MinWidth="100"
-                        Margin="5" />
-                </Grid>-->
-                    <!--
-                <UC:InputTextControl
-                    x:Name="discountITC"
-                    Title="Discount"
-                    Width="300"
-                    Margin="5"
-                    MaxLength="50" />
-            </ListViewItem>-->
+
 
                     <ListViewItem>
-
-                        <!--<Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition SharedSizeGroup="lable" />
-                        <ColumnDefinition />
-                    </Grid.ColumnDefinitions>
-                </Grid>-->
-
                         <StackPanel>
                             <TextBlock Grid.Column="0" Margin="5">Publish Date:</TextBlock>
                             <DatePicker
@@ -246,15 +121,9 @@
                                 Margin="5" />
                         </StackPanel>
                     </ListViewItem>
-                    <ListViewItem>
-                        <!--<Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition SharedSizeGroup="lable" />
-                        <ColumnDefinition />
-                    </Grid.ColumnDefinitions>
-                </Grid>-->
-                        <StackPanel>
 
+                    <ListViewItem>
+                        <StackPanel>
                             <TextBlock Grid.Column="0" Margin="5">Genre:</TextBlock>
                             <ComboBox
                                 x:Name="genreCbx"
@@ -267,14 +136,7 @@
                     </ListViewItem>
 
                     <ListViewItem>
-                        <!--<Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition SharedSizeGroup="lable" />
-                        <ColumnDefinition />
-                    </Grid.ColumnDefinitions>
-                </Grid>-->
                         <StackPanel>
-
                             <TextBlock Grid.Column="0" Margin="5">Add Image</TextBlock>
                             <Button
                                 Name="UploadPhotoBtn"
@@ -308,14 +170,7 @@
 
                 <Label Name="screenTbl" Margin="5" />
             </Border>
-            <!--<TextBlock
-            x:Name="screenTbl"
-            Grid.Column="1"
-            Margin="20"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Top"
-            Background="White"
-            TextWrapping="Wrap" />-->
+
             <UC:MyButton
                 x:Name="SaveBookBtn"
                 Grid.Column="1"

@@ -27,14 +27,20 @@ namespace BookLib.Models {
 
     }
 
-    public static class DiscountManager {
-        public static ObservableCollection<Discount> AllDiscounts { get; set; } = new ObservableCollection<Discount>();
-        public static JsonSave<Discount> LogDiscountsList = new JsonSave<Discount>("LogDiscountsList.json");
+    public class DiscountManager {
 
-        public static void Save() {
+        public static DiscountManager DM { get; set; } = new DiscountManager();
+        public ObservableCollection<Discount> AllDiscounts { get; set; } = new ObservableCollection<Discount>();
+        JsonSave<Discount> LogDiscountsList = new JsonSave<Discount>("LogDiscountsList.json");
+
+        private DiscountManager() {
+            Load();
+        }
+
+        public void Save() {
             LogDiscountsList.SaveData(AllDiscounts);
         }
-        public static void Load() {
+        public void Load() {
             AllDiscounts = new ObservableCollection<Discount>(LogDiscountsList.GetData());
         }
     }

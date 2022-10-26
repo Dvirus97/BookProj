@@ -23,15 +23,11 @@ namespace BookProj {
     public partial class HomeWin : Window {
 
         public static Frame? MainFrame;
-        Store? store;
 
         public HomeWin() {
             InitializeComponent();
-        }
-        public HomeWin(Store store) : this() {
-            this.store = store;
             MainFrame = mainFrame;
-            MainFrame.Content = new HomePage(store, this);
+            MainFrame.Content = new HomePage(this);
         }
     }
 }
