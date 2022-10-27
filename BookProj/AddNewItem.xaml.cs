@@ -85,7 +85,7 @@ namespace BookProj {
                 screenTbl.Content = $"{ex.Message} \n {ex.FailedProp}";
 
                 string text = $"{DateTime.Now} \n{ex.Message} => {ex.FailedProp}\n";
-                Store.Instace.TextSave.Save(text, true);
+                Store.Instace.LogError.Save(text, true);
             }
             catch (ArgumentNullException ex) {
 

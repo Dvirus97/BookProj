@@ -12,7 +12,7 @@ namespace BookLib {
 
         public List<Item> items { get; } = new List<Item>();
         private readonly JsonSave<Item> LogItemsList = new JsonSave<Item>("LogItemsList.json");
-        public TextSave TextSave { get; } = new TextSave("LogError.txt");
+        public TextSave LogError { get; } = new TextSave("LogError.txt");
 
         #region enum lists
         public List<Genre> GenreList { get => Enum.GetValues(typeof(Genre)).Cast<Genre>().ToList(); }

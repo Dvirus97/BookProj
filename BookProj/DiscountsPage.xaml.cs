@@ -92,6 +92,7 @@ namespace BookProj {
             if (listView.SelectedItem is not Discount dis) return;
 
             DiscountManager.Instance.AllDiscounts.Remove(dis);
+            screenLbl.Content = "discount is removed";
             DiscountManager.Instance.Save();
             homePage?.ResetView();
         }
