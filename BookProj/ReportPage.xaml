@@ -7,6 +7,7 @@
     xmlns:local="clr-namespace:BookProj"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="ReportPage"
+    xmlns:models= "clr-namespace:BookLib.Models;assembly=BookLib"
     d:DesignHeight="450"
     d:DesignWidth="800"
     FontFamily="Century Gothic"
@@ -62,7 +63,11 @@
                     <UC:MyButton
                         Margin="5"
                         Click="SerchBtn_Click"
-                        Text="Serch" />
+                        Text="Search" />
+                    <UC:MyButton
+                        Margin="5"
+                        Click="SaveFilterBtn_Click"
+                        Text="Log to File" />
 
                 </StackPanel>
             </Border>
@@ -78,7 +83,13 @@
                     x:Name="listView"
                     Margin="5"
                     Background="#FFE0EEF6"
-                    BorderBrush="Transparent" />
+                    BorderBrush="Transparent" >
+                    <ListView.ItemTemplate>
+                        <DataTemplate DataType="models.Transaction">
+                            <Label Content="{Binding {}}" Margin="5"/>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
             </Border>
         </Grid>
     </Grid>

@@ -47,7 +47,7 @@ namespace BookLib.Models {
         private List<Discount>? DiscountList {
             get {
                 List<Discount>? _discountList = new List<Discount>();
-                foreach (var item in DiscountManager.DM.AllDiscounts) {
+                foreach (var item in DiscountManager.Instance.AllDiscounts) {
                     switch (item.DiscountBy) {
                         case DiscountBy.Author:
                             if (Author is not null && this.Author.Equals(item.Name)) {

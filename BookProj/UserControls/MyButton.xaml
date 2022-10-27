@@ -11,19 +11,18 @@
 
     <Grid>
         <Border
-            VerticalAlignment="Center"
-            BorderBrush="White"
             Background="White"
+            BorderBrush="White"
             BorderThickness="1"
             CornerRadius="8">
 
             <Button
                 x:Name="Btn"
-                VerticalAlignment="Center"
                 Background="Transparent"
                 BorderBrush="Transparent"
                 Click="Button_Click"
-                Content="{Binding Text}" />
+                Content="{Binding Text}">
+            </Button>
         </Border>
 
     </Grid>

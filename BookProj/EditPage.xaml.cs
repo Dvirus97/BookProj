@@ -24,14 +24,13 @@ namespace BookProj {
         public EditPage() {
             InitializeComponent();
         }
-        public EditPage(/*Store store,*/ HomePage homePage) : this() {
-            //this.store = store;
+        public EditPage(HomePage homePage) : this() {
             this.homePage = homePage;
-            dataGrid.ItemsSource = Store.store.items;
+            dataGrid.ItemsSource = Store.Instace.items;
         }
 
         private void SaveBtn_Click(object sender, RoutedEventArgs e) {
-            Store.store?.Save();
+            Store.Instace?.Save();
             homePage?.ResetView();
         }
     }

@@ -4,8 +4,18 @@ namespace DbService {
     public class JsonSave<T> {
 
         string filePath;
+        TextSave TextSave = new TextSave("LogError.txt");
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="fileName">name of the file. [.txt / .json] </param>
         public JsonSave(string fileName) {
+            if (string.IsNullOrWhiteSpace(fileName)) {
+                string text = $"{DateTime.Now} \nfile name is empty\n";
+                TextSave.Save(text, true);
+                throw new ArgumentNullException("file name was null");
+            }
             filePath = Environment.CurrentDirectory + "/" + fileName;
         }
 
@@ -35,7 +45,7 @@ namespace DbService {
             }
             string text = File.ReadAllText(filePath);
             var list = JsonConvert.DeserializeObject<List<T>>(text, setting);
-            if (list is null) 
+            if (list is null)
                 return new List<T>();
             return list;
         }

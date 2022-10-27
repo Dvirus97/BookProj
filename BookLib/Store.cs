@@ -2,25 +2,63 @@
 using DbService;
 using System.Collections;
 using System.Collections.ObjectModel;
+using System.Data.SqlTypes;
 using System.Globalization;
 
 namespace BookLib {
-    public class Store : IList<Item>, IEnumerable<Item> {
+    public class Store {
 
-        public static Store store = new Store();
+        public static Store Instace { get; } = new Store();
 
-        public List<Item> items = new List<Item>();
-        JsonSave<Item> LogItemsList = new JsonSave<Item>("LogItemsList.json");
+        public List<Item> items { get; } = new List<Item>();
+        private readonly JsonSave<Item> LogItemsList = new JsonSave<Item>("LogItemsList.json");
+        public TextSave TextSave { get; } = new TextSave("LogError.txt");
 
-
+        #region enum lists
         public List<Genre> GenreList { get => Enum.GetValues(typeof(Genre)).Cast<Genre>().ToList(); }
         public List<DiscountBy> DiscountByList { get => Enum.GetValues(typeof(DiscountBy)).Cast<DiscountBy>().ToList(); }
         public List<itemType> ItemTypeList { get => Enum.GetValues(typeof(itemType)).Cast<itemType>().ToList(); }
         public List<FilterBy> FilterByList { get => Enum.GetValues(typeof(FilterBy)).Cast<FilterBy>().ToList(); }
+        #endregion
 
-        public List<string> AllAuthor { get => (from x in items select x.Author).ToList(); }
-        public List<string> AllName { get => (from x in items select x.Name).ToList(); }
-        public List<string> AllPublisher { get => (from x in items select x.Publisher).ToList(); }
+        #region author/ name/ publisher lists
+        public List<string> AllAuthor {
+            get {
+                List<string> temp = new List<string>();
+                foreach (var item in items) {
+                    if (item is null || item.Author is null) throw new ArgumentNullException();
+                    if (!temp.Contains(item.Author)) {
+                        temp.Add(item.Author);
+                    }
+                }
+                return temp;
+            }
+        }
+        public List<string> AllName {
+            get {
+                List<string> temp = new List<string>();
+                foreach (var item in items) {
+                    if (item is null || item.Name is null) throw new ArgumentNullException();
+                    if (!temp.Contains(item.Name)) {
+                        temp.Add(item.Name);
+                    }
+                }
+                return temp;
+            }
+        }
+        public List<string> AllPublisher {
+            get {
+                List<string> temp = new List<string>();
+                foreach (var item in items) {
+                    if (item is null || item.Publisher is null) throw new ArgumentNullException();
+                    if (!temp.Contains(item.Publisher)) {
+                        temp.Add(item.Publisher);
+                    }
+                }
+                return temp;
+            }
+        }
+        #endregion
         public bool IsAdmin { get; set; } = true;
 
         private Store() {
@@ -53,48 +91,12 @@ namespace BookLib {
         public int Count => ((ICollection<Item>)items).Count;
         public void Add(Item item) {
             ((ICollection<Item>)items).Add(item);
+            Save();
         }
         public bool Remove(Item item) {
-            return ((ICollection<Item>)items).Remove(item);
+            bool a = ((ICollection<Item>)items).Remove(item);
+            Save();
+            return a;
         }
-
-        #region Ilist
-
-        public bool IsReadOnly => ((ICollection<Item>)items).IsReadOnly;
-
-
-        public void Clear() {
-            ((ICollection<Item>)items).Clear();
-        }
-
-        public bool Contains(Item item) {
-            return ((ICollection<Item>)items).Contains(item);
-        }
-
-        public void CopyTo(Item[] array, int arrayIndex) {
-            ((ICollection<Item>)items).CopyTo(array, arrayIndex);
-        }
-
-        public IEnumerator<Item> GetEnumerator() {
-            return ((IEnumerable<Item>)items).GetEnumerator();
-        }
-
-        public int IndexOf(Item item) {
-            return ((IList<Item>)items).IndexOf(item);
-        }
-
-        public void Insert(int index, Item item) {
-            ((IList<Item>)items).Insert(index, item);
-        }
-
-
-        public void RemoveAt(int index) {
-            ((IList<Item>)items).RemoveAt(index);
-        }
-
-        IEnumerator IEnumerable.GetEnumerator() {
-            return ((IEnumerable)items).GetEnumerator();
-        }
-        #endregion
     }
 }

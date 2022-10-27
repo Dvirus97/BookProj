@@ -12,6 +12,6 @@
     FontFamily="Comic Sans MS"
     mc:Ignorable="d">
     <Grid>
-        <Frame x:Name="mainFrame" />
+        <Frame x:Name="mainFrame" NavigationUIVisibility="Visible" />
     </Grid>
 </Window>

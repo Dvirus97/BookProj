@@ -29,7 +29,7 @@ namespace BookLib.Models {
 
     public class DiscountManager {
 
-        public static DiscountManager DM { get; set; } = new DiscountManager();
+        public static DiscountManager Instance { get; } = new DiscountManager();
         public ObservableCollection<Discount> AllDiscounts { get; set; } = new ObservableCollection<Discount>();
         JsonSave<Discount> LogDiscountsList = new JsonSave<Discount>("LogDiscountsList.json");
 

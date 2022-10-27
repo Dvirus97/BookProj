@@ -11,7 +11,7 @@ namespace BookProj2 {
     public static class MyValidation {
 
         public static string ValidString(string text, string propName) {
-            if (string.IsNullOrEmpty(text)) {
+            if (string.IsNullOrWhiteSpace(text)) {
 
                 throw new InvalidInputException("This Field is Empty", propName);
             }
@@ -21,7 +21,7 @@ namespace BookProj2 {
 
         public static int ValidInt(string text, string propName) {
             int val;
-            if (string.IsNullOrEmpty(text)) {
+            if (string.IsNullOrWhiteSpace(text)) {
                 throw new InvalidInputException("This Field is Empty", propName);
             }
             if (!int.TryParse(text, out val)) {
@@ -35,7 +35,7 @@ namespace BookProj2 {
 
         public static double ValidDouble(string text, string propName) {
             double val;
-            if (string.IsNullOrEmpty(text)) {
+            if (string.IsNullOrWhiteSpace(text)) {
                 throw new InvalidInputException("This Field is Empty", propName);
             }
             if (!double.TryParse(text, out val)) {

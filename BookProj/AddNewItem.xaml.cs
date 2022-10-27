@@ -31,8 +31,8 @@ namespace BookProj {
         public AddNewItem(/*Store Store.instanc,*/ HomePage homePage) : this() {
             //this.Store.instanc = Store.instanc;
             this.homePage = homePage;
-            genreCbx.ItemsSource = Store.store.GenreList;
-            itemTypeCmb.ItemsSource = Store.store.ItemTypeList;
+            genreCbx.ItemsSource = Store.Instace.GenreList;
+            itemTypeCmb.ItemsSource = Store.Instace.ItemTypeList;
         }
 
         private void SaveBookBtn_Click(object sender, RoutedEventArgs e) {
@@ -54,7 +54,7 @@ namespace BookProj {
                     };
                     book.PhotoPath = photoPath is not null ? photoPath : "";
                     this.photoPath = null;
-                    Store.store?.Add(book);
+                    Store.Instace?.Add(book);
                 }
                 if (itemTypeCmb.SelectedIndex == 1) {
                     Journal journal = new Journal() {
@@ -73,11 +73,9 @@ namespace BookProj {
                     };
                     journal.PhotoPath = photoPath is not null ? photoPath : "";
                     this.photoPath = null;
-                    Store.store?.Add(journal);
+                    Store.Instace?.Add(journal);
                 }
 
-
-                Store.store?.Save();
                 homePage?.ResetView();
                 screenTbl.Content = "Book added and saved sucssesfuly";
                 MessageBox.Show("Navigating Back..");
@@ -85,9 +83,9 @@ namespace BookProj {
             }
             catch (InvalidInputException ex) {
                 screenTbl.Content = $"{ex.Message} \n {ex.FailedProp}";
-                //Store.instanc?.ErrorLog($"Book: {ex.Message} => {ex.FailedProp}", true);
-                //Store.instanc?.LogErrorSave.SaveData($"{DateTime.Now} Book: {ex.Message} => {ex.FailedProp}", true);
-                //Store.instanc?.ErrorLogSave.SaveData(ex, true);
+
+                string text = $"{DateTime.Now} \n{ex.Message} => {ex.FailedProp}\n";
+                Store.Instace.TextSave.Save(text, true);
             }
             catch (ArgumentNullException ex) {
 

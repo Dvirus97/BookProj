@@ -1,5 +1,6 @@
 ﻿using BookLib;
 using BookLib.Models;
+using DbService;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,10 +22,13 @@ namespace BookProj {
     /// </summary>
     public partial class ReportPage : Page {
 
+        List<Transaction> filterList = new List<Transaction>();
+        TextSave LogFilterTransaction = new TextSave("LogReportsFilter.txt");
+
         public ReportPage() {
             InitializeComponent();
-            ByCmb.ItemsSource = Store.store.FilterByList;
-            listView.ItemsSource = TransactionManager.TM.AllTransactions;
+            ByCmb.ItemsSource = Store.Instace.FilterByList;
+            listView.ItemsSource = TransactionManager.Instance.AllTransactions;
             fromDP.SelectedDate = tillDP.SelectedDate = DateTime.Now;
         }
 
@@ -41,35 +45,39 @@ namespace BookProj {
 
             switch (selectedEnum) {
                 case FilterBy.All:
-                    listView.ItemsSource = TransactionManager.TM.FilterTransactions(fromDate, tillDate, x => true);
+
+                    filterList = TransactionManager.Instance.FilterTransactions(fromDate, tillDate, x => true);
                     break;
                 case FilterBy.Name:
                     if (nameCmb.SelectedItem is null) return;
-                    listView.ItemsSource = TransactionManager.TM.FilterTransactions(fromDate, tillDate,
+                    filterList = TransactionManager.Instance.FilterTransactions(fromDate, tillDate,
                         x => x.Name is not null && x.Name.Equals(nameCmb.SelectedItem.ToString()));
                     break;
                 case FilterBy.Author:
                     if (nameCmb.SelectedItem is null) return;
-                    listView.ItemsSource = TransactionManager.TM.FilterTransactions(fromDate, tillDate,
+                    filterList = TransactionManager.Instance.FilterTransactions(fromDate, tillDate,
                         x => x.Author is not null && x.Author.Equals(nameCmb.SelectedItem.ToString()));
                     break;
                 case FilterBy.Publisher:
                     if (nameCmb.SelectedItem is null) return;
-                    listView.ItemsSource = TransactionManager.TM.FilterTransactions(fromDate, tillDate,
+                    filterList = TransactionManager.Instance.FilterTransactions(fromDate, tillDate,
                         x => x.Publisher is not null && x.Publisher.Equals(nameCmb.SelectedItem.ToString()));
                     break;
                 case FilterBy.Genre:
                     if (nameCmb.SelectedItem is null) return;
-                    listView.ItemsSource = TransactionManager.TM.FilterTransactions(fromDate, tillDate,
+                    filterList = TransactionManager.Instance.FilterTransactions(fromDate, tillDate,
                         x => x.Genre.ToString().Equals(nameCmb.SelectedItem.ToString()));
                     break;
                 case FilterBy.Item_Type:
                     if (nameCmb.SelectedItem is null) return;
-                    listView.ItemsSource = TransactionManager.TM.FilterTransactions(fromDate, tillDate,
+                    filterList = TransactionManager.Instance.FilterTransactions(fromDate, tillDate,
                         x => x.ItemType is not null && x.ItemType.Equals(nameCmb.SelectedItem.ToString()));
                     break;
                 default:
                     break;
+            }
+            if (filterList is not null) {
+                listView.ItemsSource = filterList;
             }
         }
 
@@ -82,24 +90,34 @@ namespace BookProj {
                     nameSpnl.Visibility = Visibility.Collapsed;
                     break;
                 case FilterBy.Name:
-                    nameCmb.ItemsSource = Store.store?.AllName;
+                    nameCmb.ItemsSource = Store.Instace?.AllName;
                     break;
                 case FilterBy.Author:
-                    nameCmb.ItemsSource = Store.store?.AllAuthor;
+                    nameCmb.ItemsSource = Store.Instace?.AllAuthor;
                     break;
                 case FilterBy.Publisher:
-                    nameCmb.ItemsSource = Store.store?.AllPublisher;
+                    nameCmb.ItemsSource = Store.Instace?.AllPublisher;
                     break;
                 case FilterBy.Genre:
-                    nameCmb.ItemsSource = Store.store?.GenreList;
+                    nameCmb.ItemsSource = Store.Instace?.GenreList;
                     break;
                 case FilterBy.Item_Type:
-                    nameCmb.ItemsSource = Store.store?.ItemTypeList;
+                    nameCmb.ItemsSource = Store.Instace?.ItemTypeList;
                     break;
                 default:
                     break;
             }
         }
 
+        private void SaveFilterBtn_Click(object sender, RoutedEventArgs e) {
+
+            string text = "";
+            foreach (var t in filterList) {
+                text += t.ToString() + "\n\n";
+            }
+
+            LogFilterTransaction.Save(text, false);
+            MessageBox.Show("log saved! ");
+        }
     }
 }

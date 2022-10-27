@@ -21,6 +21,7 @@ namespace BookProj {
     /// Interaction logic for DiscountsPage.xaml
     /// </summary>
     public partial class DiscountsPage : Page {
+
         private readonly HomePage? homePage;
         bool isGenre;
         private bool isAll;
@@ -32,9 +33,9 @@ namespace BookProj {
         public DiscountsPage(HomePage homePage) : this() {
 
             this.homePage = homePage;
-            discountbyCmb.ItemsSource = Store.store.DiscountByList;
-            genreCmb.ItemsSource = Store.store.GenreList;
-            listView.ItemsSource = DiscountManager.DM.AllDiscounts;
+            discountbyCmb.ItemsSource = Store.Instace.DiscountByList;
+            genreCmb.ItemsSource = Store.Instace.GenreList;
+            listView.ItemsSource = DiscountManager.Instance.AllDiscounts;
         }
 
         private void AddNewDiscoutnBtn_Click(object sender, RoutedEventArgs e) {
@@ -54,9 +55,10 @@ namespace BookProj {
 
                 double price = MyValidation.ValidInt(priceTbx.InputTbx.Text, "Discount Price");
 
-                DiscountManager.DM.AllDiscounts.Add(new Discount(disBy, discountName, price));
+                DiscountManager.Instance.AllDiscounts.Add(new Discount(disBy, discountName, price));
                 screenLbl.Content = "new discount is added";
-                DiscountManager.DM.Save();
+                DiscountManager.Instance.Save();
+                homePage?.ResetView();
             }
             catch (InvalidInputException ex) {
                 screenLbl.Content = $"{ex.Message} \n {ex.FailedProp}";
@@ -89,8 +91,9 @@ namespace BookProj {
         private void RemoveDiscoutnBtn_Click(object sender, RoutedEventArgs e) {
             if (listView.SelectedItem is not Discount dis) return;
 
-            DiscountManager.DM.AllDiscounts.Remove(dis);
-            DiscountManager.DM.Save();
+            DiscountManager.Instance.AllDiscounts.Remove(dis);
+            DiscountManager.Instance.Save();
+            homePage?.ResetView();
         }
     }
 }

@@ -33,7 +33,7 @@ namespace BookProj {
         public HomePage(HomeWin homeWin) : this() {
             this.homeWin = homeWin;
 
-            switch (Store.store.IsAdmin) {
+            switch (Store.Instace.IsAdmin) {
                 case true:
                     AdminStackPanel.Visibility = Visibility.Visible;
                     break;
@@ -43,7 +43,7 @@ namespace BookProj {
                 default:
             }
             predicate = x => true;
-            filter = Store.store.FilterList(predicate);
+            filter = Store.Instace.FilterList(predicate);
             ResetView();
             SetButtons();
             listView.ItemsSource = filter;
@@ -59,12 +59,11 @@ namespace BookProj {
         public void ResetView() {
             if (predicate is null) return;
 
-            List<Item>? temp = Store.store?.FilterList(predicate);
+            List<Item>? temp = Store.Instace?.FilterList(predicate);
             if (temp is not null)
                 filter = temp;
             listView.ItemsSource = filter;
             DateilsLbl.Content = selectedItem?.ToString();
-
         }
 
         private void listView_SelectionChanged(object sender, SelectionChangedEventArgs e) {
@@ -114,7 +113,7 @@ namespace BookProj {
 
         private void RemoveBtn_Click(object sender, RoutedEventArgs e) {
             if (listView.SelectedItem is not Item item) return;
-            Store.store?.Remove(item);
+            Store.Instace?.Remove(item);
             ResetView();
         }
 
@@ -129,27 +128,27 @@ namespace BookProj {
         }
 
         private void SellBtn_Click(object sender, RoutedEventArgs e) {
-            for (int i = 0 ; i < Store.store?.Count ; i++) {
-                Store.store[i].Amount -= Store.store[i].ShopCount;
-                if (Store.store[i].ShopCount > 0) {
+            for (int i = 0 ; i < Store.Instace?.Count ; i++) {
+                Store.Instace[i].Amount -= Store.Instace[i].ShopCount;
+                if (Store.Instace[i].ShopCount > 0) {
                     Transaction tra = new Transaction() {
-                        Name = Store.store[i].Name,
-                        Amount = Store.store[i].ShopCount,
-                        Author = Store.store[i].Author,
-                        Genre = Store.store[i].Genre,
-                        Price = Store.store[i].Price,
-                        Publisher = Store.store[i].Publisher,
+                        Name = Store.Instace[i].Name,
+                        Amount = Store.Instace[i].ShopCount,
+                        Author = Store.Instace[i].Author,
+                        Genre = Store.Instace[i].Genre,
+                        Price = Store.Instace[i].Price,
+                        Publisher = Store.Instace[i].Publisher,
                         PurchaseDate = DateTime.Now.Date,
-                        ItemType = Store.store[i].GetType().Name
+                        ItemType = Store.Instace[i].GetType().Name
                     };
-                    TransactionManager.TM.AllTransactions.Add(tra);
-                    TransactionManager.TM.Save();
+                    TransactionManager.Instance.AllTransactions.Add(tra);
+                    TransactionManager.Instance.Save();
                 }
-                if (Store.store[i].Amount <= 0) {
-                    Store.store.Remove(Store.store[i]);
+                if (Store.Instace[i].Amount <= 0) {
+                    Store.Instace.Remove(Store.Instace[i]);
                 }
                 else {
-                    Store.store[i].ShopCount = 0;
+                    Store.Instace[i].ShopCount = 0;
                 }
             }
             MessageBox.Show("All Sopping Cart Has bin bought. ");
