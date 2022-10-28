@@ -49,25 +49,21 @@
                         x:Name="showAllBtn"
                         Margin="5"
                         Click="FilterBtn_Click"
-                        
                         Text="Show All" />
                     <UC:MyButton
                         x:Name="showBooksBtn"
                         Margin="5"
                         Click="FilterBtn_Click"
-                        
                         Text="show books" />
                     <UC:MyButton
                         x:Name="showJournalsBtn"
                         Margin="5"
                         Click="FilterBtn_Click"
-                        
                         Text="show journals" />
                     <UC:MyButton
                         x:Name="showDiscountBtn"
                         Margin="5"
                         Click="FilterBtn_Click"
-                        
                         Text="show discount" />
                 </StackPanel>
             </Border>
@@ -79,10 +75,10 @@
                 BorderThickness="1"
                 CornerRadius="8">
                 <ListView
-                    BorderBrush="Transparent"
                     x:Name="listView"
                     Margin="5"
                     Background="#FFE0EEF6"
+                    BorderBrush="Transparent"
                     ItemsSource="{Binding filter}"
                     SelectionChanged="listView_SelectionChanged">
                     <ListView.ItemTemplate>
@@ -182,7 +178,7 @@
             CornerRadius="8">
             <UC:MyButton
                 Width="70"
-               Margin="5"
+                Margin="5"
                 Click="LogOutBtn_Click"
                 Text="Log Out" />
         </Border>

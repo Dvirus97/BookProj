@@ -1,4 +1,5 @@
-﻿using BookLib.Models;
+﻿using BookLib.Enums;
+using BookLib.Models;
 using DbService;
 using System.Collections;
 using System.Collections.ObjectModel;
@@ -17,7 +18,7 @@ namespace BookLib {
         #region enum lists
         public List<Genre> GenreList { get => Enum.GetValues(typeof(Genre)).Cast<Genre>().ToList(); }
         public List<DiscountBy> DiscountByList { get => Enum.GetValues(typeof(DiscountBy)).Cast<DiscountBy>().ToList(); }
-        public List<itemType> ItemTypeList { get => Enum.GetValues(typeof(itemType)).Cast<itemType>().ToList(); }
+        public List<ItemType> ItemTypeList { get => Enum.GetValues(typeof(ItemType)).Cast<ItemType>().ToList(); }
         public List<FilterBy> FilterByList { get => Enum.GetValues(typeof(FilterBy)).Cast<FilterBy>().ToList(); }
         #endregion
 

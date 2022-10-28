@@ -1,4 +1,5 @@
-﻿using DbService;
+﻿using BookLib.Enums;
+using DbService;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -25,23 +26,5 @@ namespace BookLib.Models {
             Price = price;
         }
 
-    }
-
-    public class DiscountManager {
-
-        public static DiscountManager Instance { get; } = new DiscountManager();
-        public ObservableCollection<Discount> AllDiscounts { get; set; } = new ObservableCollection<Discount>();
-        JsonSave<Discount> LogDiscountsList = new JsonSave<Discount>("LogDiscountsList.json");
-
-        private DiscountManager() {
-            Load();
-        }
-
-        public void Save() {
-            LogDiscountsList.SaveData(AllDiscounts);
-        }
-        public void Load() {
-            AllDiscounts = new ObservableCollection<Discount>(LogDiscountsList.GetData());
-        }
     }
 }

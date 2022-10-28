@@ -1,4 +1,5 @@
 ﻿using BookLib;
+using BookLib.Enums;
 using BookLib.Models;
 using BookProj2;
 using System;
@@ -71,6 +72,7 @@ namespace BookProj {
             if (DB.ToString() == "Genre") {
                 GenreSpl.Visibility = Visibility.Visible;
                 notGenreSpl.Visibility = Visibility.Collapsed;
+                genreCmb.SelectedIndex = 0;
                 isGenre = true;
                 isAll = false;
             }

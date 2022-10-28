@@ -45,14 +45,14 @@ namespace BookProj {
             predicate = x => true;
             filter = Store.Instace.FilterList(predicate);
             ResetView();
-            SetButtons();
+            SetFilterButtons();
             listView.ItemsSource = filter;
         }
 
-        void SetButtons() {
+        void SetFilterButtons() {
             showAllBtn.Tag = new Predicate<Item>(x => true);
-            showBooksBtn.Tag = new Predicate<Item>(x => x.GetType() == typeof(Book));
-            showJournalsBtn.Tag = new Predicate<Item>(x => x.GetType() == typeof(Journal));
+            showBooksBtn.Tag = new Predicate<Item>(x => x is Book);
+            showJournalsBtn.Tag = new Predicate<Item>(x => x is Journal);
             showDiscountBtn.Tag = new Predicate<Item>(x => x.Discount > 0);
         }
 

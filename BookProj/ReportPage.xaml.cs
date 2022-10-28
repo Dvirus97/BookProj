@@ -1,4 +1,5 @@
 ﻿using BookLib;
+using BookLib.Enums;
 using BookLib.Models;
 using DbService;
 using System;
@@ -28,7 +29,7 @@ namespace BookProj {
         public ReportPage() {
             InitializeComponent();
             ByCmb.ItemsSource = Store.Instace.FilterByList;
-            listView.ItemsSource = TransactionManager.Instance.AllTransactions;
+            listView.ItemsSource = TransactionManager.Instance.AllTransactions.Reverse<Transaction>();
             fromDP.SelectedDate = tillDP.SelectedDate = DateTime.Now;
         }
 
@@ -88,7 +89,8 @@ namespace BookProj {
             switch (selectedEnum) {
                 case FilterBy.All:
                     nameSpnl.Visibility = Visibility.Collapsed;
-                    break;
+                    return;
+
                 case FilterBy.Name:
                     nameCmb.ItemsSource = Store.Instace?.AllName;
                     break;
@@ -107,6 +109,7 @@ namespace BookProj {
                 default:
                     break;
             }
+            nameCmb.SelectedIndex = 0;
         }
 
         private void SaveFilterBtn_Click(object sender, RoutedEventArgs e) {
