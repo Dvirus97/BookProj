@@ -12,8 +12,18 @@ namespace BookLib.Models {
 
 
     public class Discount {
+
+        /// <summary>
+        /// enum of discount by options
+        /// </summary>
         public DiscountBy DiscountBy { get; set; }
+        /// <summary>
+        /// name of the discount by prop
+        /// </summary>
         public string? Name { get; set; }
+        /// <summary>
+        /// double number of the amount of the discount
+        /// </summary>
         public double Price { get; set; }
 
         public override string ToString() {

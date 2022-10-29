@@ -5,7 +5,12 @@
     <TargetFramework>net6.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>bookcase.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="bookcase.ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\BookLib\BookLib.csproj" />

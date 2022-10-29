@@ -26,7 +26,7 @@ namespace BookProj {
         }
         public EditPage(HomePage homePage) : this() {
             this.homePage = homePage;
-            dataGrid.ItemsSource = Store.Instace.items;
+            dataGrid.ItemsSource = Store.Instace.Items;
         }
 
         private void SaveBtn_Click(object sender, RoutedEventArgs e) {

@@ -23,7 +23,14 @@ namespace BookProj.UserControls {
             this.DataContext = this;
         }
 
+        /// <summary>
+        /// the title of the textBox
+        /// </summary>
         public string? Title { get; set; }
+
+        /// <summary>
+        /// max number of chars 
+        /// </summary>
         public int MaxLength { get; set; }
 
 

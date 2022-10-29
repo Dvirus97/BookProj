@@ -18,6 +18,15 @@ namespace BookLib {
             Load();
         }
 
+        public void Add(Transaction transaction) {
+            AllTransactions.Add(transaction);
+            Save();
+        }
+        public void Remove(Transaction transaction) {
+            AllTransactions.Remove(transaction);
+            Save();
+        }
+
         public void Save() {
             LogTransactionsList.SaveData(AllTransactions);
         }

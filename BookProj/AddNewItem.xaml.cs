@@ -23,20 +23,18 @@ namespace BookProj {
     /// Interaction logic for AddNewItem.xaml
     /// </summary>
     public partial class AddNewItem : Page {
-        //private readonly Store? Store.instanc;
         private readonly HomePage? homePage;
         string? photoPath;
         public AddNewItem() {
             InitializeComponent();
         }
-        public AddNewItem(/*Store Store.instanc,*/ HomePage homePage) : this() {
-            //this.Store.instanc = Store.instanc;
+        public AddNewItem(HomePage homePage) : this() {
             this.homePage = homePage;
             genreCbx.ItemsSource = Store.Instace.GenreList;
             itemTypeCmb.ItemsSource = Store.Instace.ItemTypeList;
         }
 
-        private void SaveBookBtn_Click(object sender, RoutedEventArgs e) {
+        private void AddNewItemBtn_Click(object sender, RoutedEventArgs e) {
             try {
                 if (itemTypeCmb.SelectedIndex == 0) {
                     Book book = new Book() {
@@ -48,10 +46,7 @@ namespace BookProj {
                         Price = MyValidation.ValidDouble(priceITC.InputTbx.Text, "Price"),
                         Amount = MyValidation.ValidInt(quantityITC.InputTbx.Text, "Quantity"),
                         Genre = (Genre)Enum.Parse(typeof(Genre), genreCbx.Text),
-                        PublishDate = MyValidation.ValidDate(PublishDateDP.SelectedDate, "publish Date"),
-                        //Discount = MyValidation.ValidDouble(discountITC.InputTbx.Text, "Discount"),
-                        //MyValidation.ValidDate(addDateDP.SelectedDate, "Add to Store.instanc date")
-
+                        PublishDate = MyValidation.ValidDate(PublishDateDP.SelectedDate, "publish Date")
                     };
                     book.PhotoPath = photoPath is not null ? photoPath : "";
                     this.photoPath = null;
@@ -67,10 +62,7 @@ namespace BookProj {
                         Price = MyValidation.ValidDouble(priceITC.InputTbx.Text, "Price"),
                         Amount = MyValidation.ValidInt(quantityITC.InputTbx.Text, "Quantity"),
                         Genre = (Genre)Enum.Parse(typeof(Genre), genreCbx.Text),
-                        PublishDate = MyValidation.ValidDate(PublishDateDP.SelectedDate, "publish Date"),
-                        //Discount = MyValidation.ValidDouble(discountITC.InputTbx.Text, "Discount"),
-                        //MyValidation.ValidDate(addDateDP.SelectedDate, "Add to Store.instanc date")
-
+                        PublishDate = MyValidation.ValidDate(PublishDateDP.SelectedDate, "publish Date")
                     };
                     journal.PhotoPath = photoPath is not null ? photoPath : "";
                     this.photoPath = null;

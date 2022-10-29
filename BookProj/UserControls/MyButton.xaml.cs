@@ -24,9 +24,22 @@ namespace BookProj.UserControls {
             InitializeComponent();
             DataContext = this;
         }
+
+        /// <summary>
+        /// text to display in content of the button
+        /// </summary>
         public string? Text { get; set; }
+
+        /// <summary>
+        /// event from user
+        /// </summary>
         public event RoutedEventHandler? Click;
 
+        /// <summary>
+        /// event to this button.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_Click(object sender, RoutedEventArgs e) {
             Click?.Invoke(this, e);
         }

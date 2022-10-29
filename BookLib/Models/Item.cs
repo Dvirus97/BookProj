@@ -18,17 +18,29 @@ namespace BookLib.Models {
         public int Edition { get; set; }
         public int Amount { get; set; }
         public int Isbn { get; set; }
+        /// <summary>
+        /// Discount number $
+        /// </summary>
         public double Discount {
             get {
                 Discount? temp = BiggestDiscount;
                 return temp is null ? 0 : temp.Price;
             }
         }
+
+        /// <summary>
+        /// price after Discount $
+        /// </summary>
         public double AfterDiscount { get { return Price - ((Price * Discount) / 100); } }
+        /// <summary>
+        /// counter for shopping cart
+        /// </summary>
         public int ShopCount { get; set; }
         public virtual string? PhotoPath { get; set; }
 
-
+        /// <summary>
+        /// the biggest discount from this.DiscountList  type:Discount
+        /// </summary>
         private Discount? BiggestDiscount {
             get {
                 List<Discount>? temp = DiscountList;
@@ -44,7 +56,9 @@ namespace BookLib.Models {
             }
         }
 
-
+        /// <summary>
+        /// discount list that fit this item. take form all discount
+        /// </summary>
         private List<Discount>? DiscountList {
             get {
                 List<Discount>? _discountList = new List<Discount>();
@@ -88,6 +102,9 @@ namespace BookLib.Models {
             return $"type: {this.GetType().Name}, \nname: {Name}, \nauthor: {Author}, \npublisher: {Publisher}, \nprice: {Price:c}, \ngenre: {Genre}, \npublish date: {PublishDate:d}, \nedition: {Edition}, \namount: {Amount}, \ndiscount: {Discount}%, \naftre discount: {AfterDiscount:c}, \nisbn: {Isbn}";
         }
 
-        public string HeadDetail { get => $"name: {Name}, price: {Price}, discount: {Discount}%"; }
+        /// <summary>
+        /// main details ot show
+        /// </summary>
+        public string HeadDetail { get => $"name: {Name}, price: {Price:c}, discount: {Discount}%"; }
     }
 }

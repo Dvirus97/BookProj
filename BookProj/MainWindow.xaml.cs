@@ -1,4 +1,5 @@
 ﻿using BookLib;
+using BookLib.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,10 +23,6 @@ namespace BookProj {
 
         public MainWindow() {
             InitializeComponent();
-
-            var d1 = DateTime.Now.Date;
-            var d2 = new DateTime(2022, 10, 25);
-
         }
 
         private void LogInBtn_Click(object sender, RoutedEventArgs e) {
@@ -33,20 +30,20 @@ namespace BookProj {
             User user = new User("user", "1234");
             User Admin = new User("admin", "admin");
 
-            //if (user.UserName.Equals(NameTbx.Text.ToLower()) &&
-            //    user.Password.Equals(PasswordPass.Password.ToLower())) {
-            //    Store.store.IsAdmin = false;
-            //    isLogIn = true;
-            //}
-            //else if (Admin.UserName.Equals(NameTbx.Text.ToLower()) &&
-            //    Admin.Password.Equals(PasswordPass.Password.ToLower())) {
-            //    Store.store.IsAdmin = true;
-            //    isLogIn = true;
-            //}
-            //else {
-            //    MessageBox.Show("Log in Failed");
-            //    return;
-            //}
+            if (user.UserName.Equals(NameTbx.Text.ToLower()) &&
+                user.Password.Equals(PasswordPass.Password.ToLower())) {
+                Store.Instace.IsAdmin = false;
+                isLogIn = true;
+            }
+            else if (Admin.UserName.Equals(NameTbx.Text.ToLower()) &&
+                Admin.Password.Equals(PasswordPass.Password.ToLower())) {
+                Store.Instace.IsAdmin = true;
+                isLogIn = true;
+            }
+            else {
+                MessageBox.Show("Log in Failed");
+                return;
+            }
 
             if (isLogIn) {
                 HomeWin homeWin = new HomeWin();
@@ -54,18 +51,5 @@ namespace BookProj {
                 this.Close();
             }
         }
-
-    }
-
-    class User {
-        public User(string userName, string password) {
-            UserName = userName;
-            Password = password;
-        }
-
-        public string UserName { get; set; }
-        public string Password { get; set; }
-
-
     }
 }

@@ -23,7 +23,14 @@ namespace BookProj {
     /// </summary>
     public partial class ReportPage : Page {
 
+        /// <summary>
+        /// list after filter
+        /// </summary>
         List<Transaction> filterList = new List<Transaction>();
+
+        /// <summary>
+        /// textSave instance to save the filterd list
+        /// </summary>
         TextSave LogFilterTransaction = new TextSave("LogReportsFilter.txt");
 
         public ReportPage() {

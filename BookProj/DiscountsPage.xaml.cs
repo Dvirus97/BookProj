@@ -41,24 +41,28 @@ namespace BookProj {
 
         private void AddNewDiscoutnBtn_Click(object sender, RoutedEventArgs e) {
             try {
-                string discountName;
+                string disName;
                 if (isGenre) {
                     if (genreCmb.SelectedItem is not Genre genre) return;
-                    discountName = genre.ToString();
+                    disName = genre.ToString();
                 }
                 else if (isAll) {
-                    discountName = "sale";
+                    disName = "sale";
                 }
                 else {
-                    discountName = discountNameTbx.InputTbx.Text;
+                    disName = discountNameTbx.InputTbx.Text;
                 }
                 if (discountbyCmb.SelectedItem is not DiscountBy disBy) return;
 
                 double price = MyValidation.ValidInt(priceTbx.InputTbx.Text, "Discount Price");
 
-                DiscountManager.Instance.AllDiscounts.Add(new Discount(disBy, discountName, price));
+                DiscountManager.Instance.Add(new Discount(disBy, disName, price));
                 screenLbl.Content = "new discount is added";
-                DiscountManager.Instance.Save();
+                discountbyCmb.SelectedIndex = 0;
+
+                discountNameTbx.InputTbx.Text = "";
+                priceTbx.InputTbx.Text = "";
+
                 homePage?.ResetView();
             }
             catch (InvalidInputException ex) {
@@ -93,9 +97,8 @@ namespace BookProj {
         private void RemoveDiscoutnBtn_Click(object sender, RoutedEventArgs e) {
             if (listView.SelectedItem is not Discount dis) return;
 
-            DiscountManager.Instance.AllDiscounts.Remove(dis);
+            DiscountManager.Instance.Remove(dis);
             screenLbl.Content = "discount is removed";
-            DiscountManager.Instance.Save();
             homePage?.ResetView();
         }
     }

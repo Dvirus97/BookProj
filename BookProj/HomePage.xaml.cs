@@ -141,8 +141,7 @@ namespace BookProj {
                         PurchaseDate = DateTime.Now.Date,
                         ItemType = Store.Instace[i].GetType().Name
                     };
-                    TransactionManager.Instance.AllTransactions.Add(tra);
-                    TransactionManager.Instance.Save();
+                    TransactionManager.Instance.Add(tra);
                 }
                 if (Store.Instace[i].Amount <= 0) {
                     Store.Instace.Remove(Store.Instace[i]);

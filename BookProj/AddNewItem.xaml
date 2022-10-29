@@ -177,7 +177,7 @@
                 Margin="20"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Bottom"
-                Click="SaveBookBtn_Click"
+                Click="AddNewItemBtn_Click"
                 Text="Add New Book" />
         </Grid>
     </Grid>

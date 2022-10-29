@@ -19,6 +19,9 @@ namespace DbService {
         }
 
         public string Load() {
+            if (!File.Exists(path)) {
+                using (FileStream fs = new FileStream(path, FileMode.Create)) { }
+            }
             using (StreamReader sr = new StreamReader(path)) {
                 return sr.ReadToEnd();
             }
