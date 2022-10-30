@@ -20,7 +20,7 @@ namespace BookLib.Models {
         public DateTime PurchaseDate { get; set; }
 
         public override string ToString() {
-            return $"date: {PurchaseDate:d} \ntype: {ItemType}, name: {Name}, authoer: {Author}, publiser: {Publisher}, price: {Price}, genre: {Genre}, amount: {Amount}";
+            return $"date: {PurchaseDate:d} \ntype: {ItemType}, name: {Name}, author: {Author}, publiser: {Publisher}, price: {Price}, genre: {Genre}, amount: {Amount}";
         }
     }
 }

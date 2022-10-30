@@ -4,6 +4,8 @@ using BookLib.Models;
 using DbService;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -36,54 +38,37 @@ namespace BookProj {
         public ReportPage() {
             InitializeComponent();
             ByCmb.ItemsSource = Store.Instace.FilterByList;
-            listView.ItemsSource = TransactionManager.Instance.AllTransactions.Reverse<Transaction>();
+            listView.ItemsSource = new string[1] { "choose a filter and click the search button to display" }; ;
             fromDP.SelectedDate = tillDP.SelectedDate = DateTime.Now;
         }
 
 
 
-        private void SerchBtn_Click(object sender, RoutedEventArgs e) {
+        private void SearchBtn_Click(object sender, RoutedEventArgs e) {
             if (fromDP.SelectedDate is null) return;
             if (tillDP.SelectedDate is null) return;
 
             if (fromDP.SelectedDate is not DateTime fromDate) return;
             if (tillDP.SelectedDate is not DateTime tillDate) return;
 
+            Predicate<Transaction> predicate;
             var selectedEnum = (FilterBy)ByCmb.SelectedItem;
-
-            switch (selectedEnum) {
-                case FilterBy.All:
-
-                    filterList = TransactionManager.Instance.FilterTransactions(fromDate, tillDate, x => true);
-                    break;
-                case FilterBy.Name:
-                    if (nameCmb.SelectedItem is null) return;
-                    filterList = TransactionManager.Instance.FilterTransactions(fromDate, tillDate,
-                        x => x.Name is not null && x.Name.Equals(nameCmb.SelectedItem.ToString()));
-                    break;
-                case FilterBy.Author:
-                    if (nameCmb.SelectedItem is null) return;
-                    filterList = TransactionManager.Instance.FilterTransactions(fromDate, tillDate,
-                        x => x.Author is not null && x.Author.Equals(nameCmb.SelectedItem.ToString()));
-                    break;
-                case FilterBy.Publisher:
-                    if (nameCmb.SelectedItem is null) return;
-                    filterList = TransactionManager.Instance.FilterTransactions(fromDate, tillDate,
-                        x => x.Publisher is not null && x.Publisher.Equals(nameCmb.SelectedItem.ToString()));
-                    break;
-                case FilterBy.Genre:
-                    if (nameCmb.SelectedItem is null) return;
-                    filterList = TransactionManager.Instance.FilterTransactions(fromDate, tillDate,
-                        x => x.Genre.ToString().Equals(nameCmb.SelectedItem.ToString()));
-                    break;
-                case FilterBy.Item_Type:
-                    if (nameCmb.SelectedItem is null) return;
-                    filterList = TransactionManager.Instance.FilterTransactions(fromDate, tillDate,
-                        x => x.ItemType is not null && x.ItemType.Equals(nameCmb.SelectedItem.ToString()));
-                    break;
-                default:
-                    break;
+            if (nameCmb.SelectedItem is null) {
+                predicate = x => true;
             }
+            else {
+                string? CmbSelected = nameCmb.SelectedItem.ToString();
+                predicate = selectedEnum switch {
+                    FilterBy.All => x => true,
+                    FilterBy.Name => x => x.Name is not null && x.Name.Equals(CmbSelected),
+                    FilterBy.Author => x => x.Author is not null && x.Author.Equals(CmbSelected),
+                    FilterBy.Publisher => x => x.Publisher is not null && x.Publisher.Equals(CmbSelected),
+                    FilterBy.Genre => x => x.Genre.ToString().Equals(CmbSelected),
+                    FilterBy.Item_Type => x => x.ItemType is not null && x.ItemType.Equals(CmbSelected),
+                    _ => x => true,
+                };
+            }
+            filterList = TransactionManager.Instance.FilterTransactions(fromDate, tillDate, predicate);
             if (filterList is not null) {
                 listView.ItemsSource = filterList;
             }
@@ -96,22 +81,22 @@ namespace BookProj {
             switch (selectedEnum) {
                 case FilterBy.All:
                     nameSpnl.Visibility = Visibility.Collapsed;
-                    return;
+                    break;
 
                 case FilterBy.Name:
-                    nameCmb.ItemsSource = Store.Instace?.AllName;
+                    nameCmb.ItemsSource = Store.Instace.AllName;
                     break;
                 case FilterBy.Author:
-                    nameCmb.ItemsSource = Store.Instace?.AllAuthor;
+                    nameCmb.ItemsSource = Store.Instace.AllAuthor;
                     break;
                 case FilterBy.Publisher:
-                    nameCmb.ItemsSource = Store.Instace?.AllPublisher;
+                    nameCmb.ItemsSource = Store.Instace.AllPublisher;
                     break;
                 case FilterBy.Genre:
-                    nameCmb.ItemsSource = Store.Instace?.GenreList;
+                    nameCmb.ItemsSource = Store.Instace.GenreList;
                     break;
                 case FilterBy.Item_Type:
-                    nameCmb.ItemsSource = Store.Instace?.ItemTypeList;
+                    nameCmb.ItemsSource = Store.Instace.ItemTypeList;
                     break;
                 default:
                     break;
@@ -121,13 +106,19 @@ namespace BookProj {
 
         private void SaveFilterBtn_Click(object sender, RoutedEventArgs e) {
 
-            string text = "";
+            string text = "file path: \n" + LogFilterTransaction.path + "\n\n";
             foreach (var t in filterList) {
                 text += t.ToString() + "\n\n";
             }
 
             LogFilterTransaction.Save(text, false);
-            MessageBox.Show("log saved! ");
+            MessageBox.Show("log saved! Opening File...");
+
+            new Process {
+                StartInfo = new ProcessStartInfo(LogFilterTransaction.path) {
+                    UseShellExecute = true
+                }
+            }.Start();
         }
     }
 }

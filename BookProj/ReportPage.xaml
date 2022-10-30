@@ -62,7 +62,7 @@
 
                     <UC:MyButton
                         Margin="5"
-                        Click="SerchBtn_Click"
+                        Click="SearchBtn_Click"
                         Text="Search" />
                     <UC:MyButton
                         Margin="5"

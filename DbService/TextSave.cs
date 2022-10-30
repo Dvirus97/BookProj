@@ -6,10 +6,17 @@ using System.Threading.Tasks;
 
 namespace DbService {
     public class TextSave {
-        string path;
+        public string path;
 
         public TextSave(string fileName) {
-            path = Environment.CurrentDirectory + "/" + fileName;
+            if (string.IsNullOrWhiteSpace(fileName)) {
+                using (StreamWriter sw = new StreamWriter("LogError.txt")) {
+                    sw.WriteLine("file name is in valid. can't start new instance.");
+                }
+                throw new ArgumentNullException("file name is null ");
+            }
+            else
+                path = Environment.CurrentDirectory + "/" + fileName;
         }
 
         public void Save(string text, bool append = false) {
