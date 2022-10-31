@@ -25,8 +25,6 @@ namespace BookProj {
     public partial class DiscountsPage : Page {
 
         private readonly HomePage? homePage;
-        private bool isAll = false;
-
         public DiscountsPage() {
             InitializeComponent();
         }
@@ -35,7 +33,6 @@ namespace BookProj {
 
             this.homePage = homePage;
             discountbyCmb.ItemsSource = Store.Instace.DiscountByList;
-            //NameCmb.ItemsSource = Store.Instace.GenreList;
             listView.ItemsSource = DiscountManager.Instance.AllDiscounts;
         }
 
