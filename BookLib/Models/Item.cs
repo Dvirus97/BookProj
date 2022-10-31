@@ -64,6 +64,16 @@ namespace BookLib.Models {
                 List<Discount>? _discountList = new List<Discount>();
                 foreach (var item in DiscountManager.Instance.AllDiscounts) {
                     switch (item.DiscountBy) {
+                        case DiscountBy.Item_Type:
+                            if (this.GetType().Name.Equals(item.Name)) {
+                                _discountList?.Add(item);
+                            }
+                            break;
+                        case DiscountBy.Name:
+                            if (Name is not null && this.Name.Equals(item.Name)) {
+                                _discountList?.Add(item);
+                            }
+                            break;
                         case DiscountBy.Author:
                             if (Author is not null && this.Author.Equals(item.Name)) {
                                 _discountList?.Add(item);

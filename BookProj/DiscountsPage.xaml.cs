@@ -4,6 +4,7 @@ using BookLib.Models;
 using BookProj2;
 using System;
 using System.Collections.Generic;
+using System.DirectoryServices.ActiveDirectory;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,8 +25,7 @@ namespace BookProj {
     public partial class DiscountsPage : Page {
 
         private readonly HomePage? homePage;
-        bool isGenre;
-        private bool isAll;
+        private bool isAll = false;
 
         public DiscountsPage() {
             InitializeComponent();
@@ -35,23 +35,16 @@ namespace BookProj {
 
             this.homePage = homePage;
             discountbyCmb.ItemsSource = Store.Instace.DiscountByList;
-            genreCmb.ItemsSource = Store.Instace.GenreList;
+            //NameCmb.ItemsSource = Store.Instace.GenreList;
             listView.ItemsSource = DiscountManager.Instance.AllDiscounts;
         }
 
         private void AddNewDiscoutnBtn_Click(object sender, RoutedEventArgs e) {
             try {
-                string disName;
-                if (isGenre) {
-                    if (genreCmb.SelectedItem is not Genre genre) return;
-                    disName = genre.ToString();
-                }
-                else if (isAll) {
-                    disName = "sale";
-                }
-                else {
-                    disName = discountNameTbx.InputTbx.Text;
-                }
+                string? temp = NameCmb.SelectedItem.ToString();
+                if (temp is null) return;
+                string disName = temp;
+
                 if (discountbyCmb.SelectedItem is not DiscountBy disBy) return;
 
                 double price = MyValidation.ValidInt(priceTbx.InputTbx.Text, "Discount Price");
@@ -60,7 +53,6 @@ namespace BookProj {
                 screenLbl.Content = "new discount is added";
                 discountbyCmb.SelectedIndex = 0;
 
-                discountNameTbx.InputTbx.Text = "";
                 priceTbx.InputTbx.Text = "";
 
                 homePage?.ResetView();
@@ -71,27 +63,19 @@ namespace BookProj {
         }
 
         private void discountbyCmb_SelectionChanged(object sender, SelectionChangedEventArgs e) {
-            if (discountbyCmb.SelectedItem is not DiscountBy DB) return;
+            DiscountBy selectedEnum = (DiscountBy)discountbyCmb.SelectedItem;
 
-            if (DB.ToString() == "Genre") {
-                GenreSpl.Visibility = Visibility.Visible;
-                notGenreSpl.Visibility = Visibility.Collapsed;
-                genreCmb.SelectedIndex = 0;
-                isGenre = true;
-                isAll = false;
-            }
-            else if (DB.ToString() == "AllStore") {
-                GenreSpl.Visibility = Visibility.Collapsed;
-                notGenreSpl.Visibility = Visibility.Collapsed;
-                isGenre = false;
-                isAll = true;
-            }
-            else {
-                GenreSpl.Visibility = Visibility.Collapsed;
-                notGenreSpl.Visibility = Visibility.Visible;
-                isAll = false;
-                isGenre = false;
-            }
+            NameCmb.ItemsSource = selectedEnum switch {
+                DiscountBy.Item_Type => Store.Instace.ItemTypeList,
+                DiscountBy.Name => Store.Instace.AllName,
+                DiscountBy.Author => Store.Instace.AllAuthor,
+                DiscountBy.Publisher => Store.Instace.AllPublisher,
+                DiscountBy.Genre => Store.Instace.GenreList,
+                DiscountBy.AllStore => new string[1] { "Sale" },
+                _ => null,
+            };
+
+            NameCmb.SelectedIndex = 0;
         }
 
         private void RemoveDiscoutnBtn_Click(object sender, RoutedEventArgs e) {

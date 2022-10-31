@@ -6,6 +6,6 @@ using System.Threading.Tasks;
 
 namespace BookLib.Enums {
     public enum DiscountBy {
-        Author, Publisher, Genre, AllStore
+        Name, Author, Publisher, Genre, Item_Type, AllStore
     }
 }
