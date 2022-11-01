@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DbService {
     public class TextSave {
-        public string path;
+        public string path { get; }
 
         public TextSave(string fileName) {
             if (string.IsNullOrWhiteSpace(fileName)) {
@@ -19,7 +19,7 @@ namespace DbService {
                 path = Environment.CurrentDirectory + "/" + fileName;
         }
 
-        public void Save(string text, bool append = false) {
+        public void Log(string text, bool append = false) {
             using (StreamWriter sw = new StreamWriter(path, append)) {
                 sw.WriteLine(text);
             }

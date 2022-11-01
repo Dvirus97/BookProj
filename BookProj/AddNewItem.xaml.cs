@@ -36,38 +36,20 @@ namespace BookProj {
 
         private void AddNewItemBtn_Click(object sender, RoutedEventArgs e) {
             try {
-                if (itemTypeCmb.SelectedIndex == 0) {
-                    Book book = new Book() {
+                ItemType type = (ItemType)itemTypeCmb.SelectedItem;
 
-                        Author = MyValidation.ValidString(authorITC.InputTbx.Text, "Autor"),
-                        Edition = MyValidation.ValidInt(editionITC.InputTbx.Text, "Edition"),
-                        Publisher = MyValidation.ValidString(publisherITC.InputTbx.Text, "Publisher"),
-                        Name = MyValidation.ValidString(nameITC.InputTbx.Text, "Name"),
-                        Price = MyValidation.ValidDouble(priceITC.InputTbx.Text, "Price"),
-                        Amount = MyValidation.ValidInt(quantityITC.InputTbx.Text, "Quantity"),
-                        Genre = (Genre)Enum.Parse(typeof(Genre), genreCbx.Text),
-                        PublishDate = MyValidation.ValidDate(PublishDateDP.SelectedDate, "publish Date")
-                    };
-                    book.PhotoPath = photoPath is not null ? photoPath : "";
-                    this.photoPath = null;
-                    Store.Instace?.Add(book);
+                switch (type) {
+                    case ItemType.Book:
+                        Store.Instace?.Add(NewBook());
+                        break;
+                    case ItemType.Journal:
+                        Store.Instace?.Add(NewJournal());
+                        break;
+                    default:
+                        break;
                 }
-                if (itemTypeCmb.SelectedIndex == 1) {
-                    Journal journal = new Journal() {
 
-                        Author = MyValidation.ValidString(authorITC.InputTbx.Text, "Autor"),
-                        Edition = MyValidation.ValidInt(editionITC.InputTbx.Text, "Edition"),
-                        Publisher = MyValidation.ValidString(publisherITC.InputTbx.Text, "Publisher"),
-                        Name = MyValidation.ValidString(nameITC.InputTbx.Text, "Name"),
-                        Price = MyValidation.ValidDouble(priceITC.InputTbx.Text, "Price"),
-                        Amount = MyValidation.ValidInt(quantityITC.InputTbx.Text, "Quantity"),
-                        Genre = (Genre)Enum.Parse(typeof(Genre), genreCbx.Text),
-                        PublishDate = MyValidation.ValidDate(PublishDateDP.SelectedDate, "publish Date")
-                    };
-                    journal.PhotoPath = photoPath is not null ? photoPath : "";
-                    this.photoPath = null;
-                    Store.Instace?.Add(journal);
-                }
+                this.photoPath = null;
 
                 homePage?.ResetView();
                 screenTbl.Content = "Book added and saved sucssesfuly";
@@ -78,13 +60,47 @@ namespace BookProj {
                 screenTbl.Content = $"{ex.Message} \n {ex.FailedProp}";
 
                 string text = $"{DateTime.Now} \n{ex.Message} => {ex.FailedProp}\n";
-                Store.Instace.LogError.Save(text, true);
+                Store.Instace.LogError.Log(text, true);
             }
             catch (ArgumentNullException ex) {
-
                 MessageBox.Show(ex.Message);
             }
 
+        }
+
+        Book NewBook() {
+            Book book = new Book() {
+                Author = MyValidation.ValidString(authorITC.InputTbx.Text, "Autor"),
+                Edition = MyValidation.ValidInt(editionITC.InputTbx.Text, "Edition"),
+                Publisher = MyValidation.ValidString(publisherITC.InputTbx.Text, "Publisher"),
+                Name = MyValidation.ValidString(nameITC.InputTbx.Text, "Name"),
+                Price = MyValidation.ValidDouble(priceITC.InputTbx.Text, "Price"),
+                Amount = MyValidation.ValidInt(quantityITC.InputTbx.Text, "Quantity"),
+                Genre = (Genre)Enum.Parse(typeof(Genre), genreCbx.Text),
+                PublishDate = MyValidation.ValidDate(PublishDateDP.SelectedDate, "publish Date"),
+            };
+            if (photoPath is not null) {
+                book.PhotoPath = photoPath;
+            }
+            return book;
+        }
+
+        Journal NewJournal() {
+            Journal journal = new Journal() {
+                Author = MyValidation.ValidString(authorITC.InputTbx.Text, "Autor"),
+                Edition = MyValidation.ValidInt(editionITC.InputTbx.Text, "Edition"),
+                Publisher = MyValidation.ValidString(publisherITC.InputTbx.Text, "Publisher"),
+                Name = MyValidation.ValidString(nameITC.InputTbx.Text, "Name"),
+                Price = MyValidation.ValidDouble(priceITC.InputTbx.Text, "Price"),
+                Amount = MyValidation.ValidInt(quantityITC.InputTbx.Text, "Quantity"),
+                Genre = (Genre)Enum.Parse(typeof(Genre), genreCbx.Text),
+                PublishDate = MyValidation.ValidDate(PublishDateDP.SelectedDate, "publish Date"),
+                PhotoPath = photoPath is not null ? photoPath : ""
+            };
+            if (photoPath is not null) {
+                journal.PhotoPath = photoPath;
+            }
+            return journal;
         }
 
         private void UploadPhotoBtn_Click(object sender, RoutedEventArgs e) {
@@ -95,7 +111,7 @@ namespace BookProj {
             dlg.Filter = "Image files (*.bmp, *.jpg, *.png, *.jpeg, *.gif)|*.bmp;*.jpg;*.png;*.jpeg;*.gif";
             bool? ans = dlg.ShowDialog();
             if (ans is true) {
-                photoPath = dlg.FileName;
+                this.photoPath = dlg.FileName;
             }
         }
     }

@@ -101,7 +101,7 @@ namespace BookLib.Models {
         }
 
 
-        Random Random = new Random();
+        Random Random = new();
 
         public Item() {
             Isbn = Random.Next(100_000, 100_000_000);

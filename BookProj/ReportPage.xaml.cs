@@ -45,29 +45,24 @@ namespace BookProj {
 
 
         private void SearchBtn_Click(object sender, RoutedEventArgs e) {
-            if (fromDP.SelectedDate is null) return;
-            if (tillDP.SelectedDate is null) return;
-
             if (fromDP.SelectedDate is not DateTime fromDate) return;
             if (tillDP.SelectedDate is not DateTime tillDate) return;
 
             Predicate<Transaction> predicate;
             var selectedEnum = (FilterBy)ByCmb.SelectedItem;
-            if (nameCmb.SelectedItem is null) {
-                predicate = x => true;
-            }
-            else {
-                string? CmbSelected = nameCmb.SelectedItem.ToString();
-                predicate = selectedEnum switch {
-                    FilterBy.All => x => true,
-                    FilterBy.Name => x => x.Name is not null && x.Name.Equals(CmbSelected),
-                    FilterBy.Author => x => x.Author is not null && x.Author.Equals(CmbSelected),
-                    FilterBy.Publisher => x => x.Publisher is not null && x.Publisher.Equals(CmbSelected),
-                    FilterBy.Genre => x => x.Genre.ToString().Equals(CmbSelected),
-                    FilterBy.Item_Type => x => x.ItemType is not null && x.ItemType.Equals(CmbSelected),
-                    _ => x => true,
-                };
-            }
+            if (nameCmb.SelectedItem is null) return;
+
+            string? CmbSelected = nameCmb.SelectedItem.ToString();
+            predicate = selectedEnum switch {
+                FilterBy.All => x => true,
+                FilterBy.Name => x => x.Name is not null && x.Name.Equals(CmbSelected),
+                FilterBy.Author => x => x.Author is not null && x.Author.Equals(CmbSelected),
+                FilterBy.Publisher => x => x.Publisher is not null && x.Publisher.Equals(CmbSelected),
+                FilterBy.Genre => x => x.Genre.ToString().Equals(CmbSelected),
+                FilterBy.Item_Type => x => x.ItemType is not null && x.ItemType.Equals(CmbSelected),
+                _ => x => true,
+            };
+
             filterList = TransactionManager.Instance.FilterTransactions(fromDate, tillDate, predicate);
             if (filterList is not null) {
                 listView.ItemsSource = filterList;
@@ -76,42 +71,28 @@ namespace BookProj {
 
         private void ByCmb_SelectionChanged(object sender, SelectionChangedEventArgs e) {
             FilterBy selectedEnum = (FilterBy)ByCmb.SelectedItem;
-            nameSpnl.Visibility = Visibility.Visible;
+            //nameSpnl.Visibility = Visibility.Visible;
 
-            switch (selectedEnum) {
-                case FilterBy.All:
-                    nameSpnl.Visibility = Visibility.Collapsed;
-                    break;
-
-                case FilterBy.Name:
-                    nameCmb.ItemsSource = Store.Instace.AllName;
-                    break;
-                case FilterBy.Author:
-                    nameCmb.ItemsSource = Store.Instace.AllAuthor;
-                    break;
-                case FilterBy.Publisher:
-                    nameCmb.ItemsSource = Store.Instace.AllPublisher;
-                    break;
-                case FilterBy.Genre:
-                    nameCmb.ItemsSource = Store.Instace.GenreList;
-                    break;
-                case FilterBy.Item_Type:
-                    nameCmb.ItemsSource = Store.Instace.ItemTypeList;
-                    break;
-                default:
-                    break;
-            }
+            nameCmb.ItemsSource = selectedEnum switch {
+                FilterBy.All => new string[1] { "All" },//nameSpnl.Visibility = Visibility.Collapsed;
+                FilterBy.Name => Store.Instace.AllName,
+                FilterBy.Author => Store.Instace.AllAuthor,
+                FilterBy.Publisher => Store.Instace.AllPublisher,
+                FilterBy.Genre => Store.Instace.GenreList,
+                FilterBy.Item_Type => Store.Instace.ItemTypeList,
+                _ => null,
+            };
             nameCmb.SelectedIndex = 0;
         }
 
         private void SaveFilterBtn_Click(object sender, RoutedEventArgs e) {
-
-            string text = "file path: \n" + LogFilterTransaction.path + "\n\n";
+            StringBuilder text = new StringBuilder("file path: \n" + LogFilterTransaction.path + "\n\n");
+            //string text = "file path: \n" + LogFilterTransaction.path + "\n\n";
             foreach (var t in filterList) {
-                text += t.ToString() + "\n\n";
+                text.AppendLine(t.ToString() + "\n");
             }
 
-            LogFilterTransaction.Save(text, false);
+            LogFilterTransaction.Log(text.ToString(), false);
             MessageBox.Show("log saved! Opening File...");
 
             new Process {

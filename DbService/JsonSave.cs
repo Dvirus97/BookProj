@@ -13,7 +13,7 @@ namespace DbService {
         public JsonSave(string fileName) {
             if (string.IsNullOrWhiteSpace(fileName)) {
                 string text = $"{DateTime.Now} \nfile name is empty\n";
-                TextSave.Save(text, true);
+                TextSave.Log(text, true);
                 throw new ArgumentNullException("file name was null");
             }
             filePath = Environment.CurrentDirectory + "/" + fileName;

@@ -43,9 +43,7 @@ namespace BookProj {
                 string disName = temp;
 
                 if (discountbyCmb.SelectedItem is not DiscountBy disBy) return;
-
                 double price = MyValidation.ValidInt(priceTbx.InputTbx.Text, "Discount Price");
-
                 DiscountManager.Instance.Add(new Discount(disBy, disName, price));
                 screenLbl.Content = "new discount is added";
                 discountbyCmb.SelectedIndex = 0;

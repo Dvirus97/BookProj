@@ -7,7 +7,6 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace BookLib.Models {
-    [Serializable]
     public class InvalidInputException : Exception {
 
         public string? FailedProp { get; set; }

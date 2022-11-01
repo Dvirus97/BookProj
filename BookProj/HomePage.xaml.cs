@@ -84,7 +84,6 @@ namespace BookProj {
 
         private void MinusBtn_click(object sender, RoutedEventArgs e) {
             if (sender is not Button btn) return;
-
             if (btn.Tag is not Item item) return;
 
             if (item.ShopCount > 0)
@@ -94,7 +93,6 @@ namespace BookProj {
 
         private void FilterBtn_Click(object sender, RoutedEventArgs e) {
             if (sender is not MyButton btn) return;
-
             if (btn.Tag is not Predicate<Item> pred) return;
             this.predicate = pred;
             ResetView();
@@ -131,16 +129,7 @@ namespace BookProj {
             for (int i = 0 ; i < Store.Instace?.Count ; i++) {
                 Store.Instace[i].Amount -= Store.Instace[i].ShopCount;
                 if (Store.Instace[i].ShopCount > 0) {
-                    Transaction tra = new Transaction() {
-                        Name = Store.Instace[i].Name,
-                        Amount = Store.Instace[i].ShopCount,
-                        Author = Store.Instace[i].Author,
-                        Genre = Store.Instace[i].Genre,
-                        Price = Store.Instace[i].Price,
-                        Publisher = Store.Instace[i].Publisher,
-                        PurchaseDate = DateTime.Now.Date,
-                        ItemType = Store.Instace[i].GetType().Name
-                    };
+                    Transaction tra = NewTransaction(Store.Instace[i]);
                     TransactionManager.Instance.Add(tra);
                 }
                 if (Store.Instace[i].Amount <= 0) {
@@ -152,7 +141,20 @@ namespace BookProj {
             }
             MessageBox.Show("All Sopping Cart Has bin bought. ");
             ResetView();
-            //Store.instanc?.Save();
+            Store.Instace?.Save();
+        }
+
+        Transaction NewTransaction(Item item) {
+            return new Transaction() {
+                Name = item.Name,
+                Amount = item.ShopCount,
+                Author = item.Author,
+                Genre = item.Genre,
+                Price = item.Price,
+                Publisher = item.Publisher,
+                PurchaseDate = DateTime.Now.Date,
+                ItemType = item.GetType().Name
+            };
         }
 
         private void ReportsBtn_Click(object sender, RoutedEventArgs e) {

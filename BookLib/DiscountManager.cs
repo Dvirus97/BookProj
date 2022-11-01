@@ -30,11 +30,13 @@ namespace BookLib {
         }
 
         public void Add(Discount dis) {
-            AllDiscounts.Add(dis); Save();
+            AllDiscounts.Add(dis);
+            Save();
         }
 
         public void Remove(Discount dis) {
-            AllDiscounts.Remove(dis); Save();
+            AllDiscounts.Remove(dis);
+            Save();
         }
 
         public void Save() {
