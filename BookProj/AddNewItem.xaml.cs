@@ -65,7 +65,6 @@ namespace BookProj {
             catch (ArgumentNullException ex) {
                 MessageBox.Show(ex.Message);
             }
-
         }
 
         Book NewBook() {

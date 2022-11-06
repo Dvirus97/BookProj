@@ -139,7 +139,7 @@ namespace BookProj {
                     Store.Instace[i].ShopCount = 0;
                 }
             }
-            MessageBox.Show("All Sopping Cart Has bin bought. ");
+            MessageBox.Show("All Shopping Cart Has been bought. ");
             ResetView();
             Store.Instace?.Save();
         }
