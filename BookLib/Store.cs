@@ -30,10 +30,10 @@ namespace BookLib {
         public TextSave LogError { get; } = new TextSave("LogError.txt");
 
         #region enum lists - convert enum to list
-        public List<Genre> GenreList { get => Enum.GetValues(typeof(Genre)).Cast<Genre>().ToList(); }
-        public List<DiscountBy> DiscountByList { get => Enum.GetValues(typeof(DiscountBy)).Cast<DiscountBy>().ToList(); }
-        public List<ItemType> ItemTypeList { get => Enum.GetValues(typeof(ItemType)).Cast<ItemType>().ToList(); }
-        public List<FilterBy> FilterByList { get => Enum.GetValues(typeof(FilterBy)).Cast<FilterBy>().ToList(); }
+        public List<Genre> GenreList { get; } = Enum.GetValues(typeof(Genre)).Cast<Genre>().ToList();
+        public List<DiscountBy> DiscountByList { get; } = Enum.GetValues(typeof(DiscountBy)).Cast<DiscountBy>().ToList();
+        public List<ItemType> ItemTypeList { get; } = Enum.GetValues(typeof(ItemType)).Cast<ItemType>().ToList();
+        public List<FilterBy> FilterByList { get; } = Enum.GetValues(typeof(FilterBy)).Cast<FilterBy>().ToList();
         #endregion
 
         #region author/ name/ publisher lists - convert props from all items to list

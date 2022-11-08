@@ -116,11 +116,12 @@
                                             Content="&#xE738;"
                                             FontFamily="Segoe MDL2 Assets"
                                             FontSize="15"
-                                            Tag="{Binding {}}" />
+                                            />
                                         <TextBlock
                                             Margin="5"
                                             FontSize="12"
-                                            Text="{Binding ShopCount}" />
+                                            Text="{Binding ShopCount}"
+                                            />
                                         <Button
                                             Width="20"
                                             Height="20"
@@ -131,7 +132,7 @@
                                             Content="&#xE710;"
                                             FontFamily="Segoe MDL2 Assets"
                                             FontSize="15"
-                                            Tag="{Binding {}}" />
+                                            />
                                     </StackPanel>
                                 </Label>
                             </Grid>

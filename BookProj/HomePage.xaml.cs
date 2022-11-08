@@ -75,7 +75,7 @@ namespace BookProj {
         private void PlusBtn_click(object sender, RoutedEventArgs e) {
             if (sender is not Button btn) return;
 
-            if (btn.Tag is not Item item) return;
+            if (btn.DataContext is not Item item) return;
 
             if (item.ShopCount < item.Amount)
                 item.ShopCount++;
@@ -84,7 +84,7 @@ namespace BookProj {
 
         private void MinusBtn_click(object sender, RoutedEventArgs e) {
             if (sender is not Button btn) return;
-            if (btn.Tag is not Item item) return;
+            if (btn.DataContext is not Item item) return;
 
             if (item.ShopCount > 0)
                 item.ShopCount--;
@@ -161,5 +161,6 @@ namespace BookProj {
             if (HomeWin.MainFrame is null) return;
             HomeWin.MainFrame.Content = new ReportPage();
         }
+
     }
 }

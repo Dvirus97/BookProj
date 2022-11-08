@@ -21,8 +21,7 @@
                 Background="Transparent"
                 BorderBrush="Transparent"
                 Click="Button_Click"
-                Content="{Binding Text}">
-            </Button>
+                Content="{Binding Text}" />
         </Border>
 
     </Grid>
