@@ -3,11 +3,20 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookProj", "BookProj\BookProj.csproj", "{9AC39C8B-1A53-4B14-B9D1-52D866226CD3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookProj", "BookProj\BookProj.csproj", "{9AC39C8B-1A53-4B14-B9D1-52D866226CD3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookLib", "BookLib\BookLib.csproj", "{C63B9274-E7D8-4E9D-8BE6-FB98B8E16AEB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookLib", "BookLib\BookLib.csproj", "{C63B9274-E7D8-4E9D-8BE6-FB98B8E16AEB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbService", "DbService\DbService.csproj", "{158D18E2-64BD-4064-B9C9-B70189210FB3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DbService", "DbService\DbService.csproj", "{158D18E2-64BD-4064-B9C9-B70189210FB3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{77CB1854-98B3-422A-928D-09BB3F1AAE5E}"
+	ProjectSection(SolutionItems) = preProject
+		BookProj\bin\Debug\net6.0-windows\LogError.txt = BookProj\bin\Debug\net6.0-windows\LogError.txt
+		BookProj\bin\Debug\net6.0-windows\LogItemsList.json = BookProj\bin\Debug\net6.0-windows\LogItemsList.json
+		BookProj\bin\Debug\net6.0-windows\LogReportsFilter.json = BookProj\bin\Debug\net6.0-windows\LogReportsFilter.json
+		BookProj\bin\Debug\net6.0-windows\LogReportsFilter.txt = BookProj\bin\Debug\net6.0-windows\LogReportsFilter.txt
+		BookProj\bin\Debug\net6.0-windows\LogTransactionsList.json = BookProj\bin\Debug\net6.0-windows\LogTransactionsList.json
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

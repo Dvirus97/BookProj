@@ -178,7 +178,7 @@
                 HorizontalAlignment="Center"
                 VerticalAlignment="Bottom"
                 Click="AddNewItemBtn_Click"
-                Text="Add New Book" />
+                Text="Add New Item" />
         </Grid>
     </Grid>
 </Page>
