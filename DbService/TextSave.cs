@@ -17,6 +17,10 @@ namespace DbService {
             }
             else
                 path = Environment.CurrentDirectory + "/" + fileName;
+
+            if (!File.Exists(path)) {
+                using (FileStream fs = new FileStream(path, FileMode.Create)) { }
+            }
         }
 
         public void Log(string text, bool append = false) {
@@ -26,9 +30,6 @@ namespace DbService {
         }
 
         public string Load() {
-            if (!File.Exists(path)) {
-                using (FileStream fs = new FileStream(path, FileMode.Create)) { }
-            }
             using (StreamReader sr = new StreamReader(path)) {
                 return sr.ReadToEnd();
             }
