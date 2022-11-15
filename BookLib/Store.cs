@@ -82,7 +82,7 @@ namespace BookLib {
 
         private Store() {
             //CreateTempList();
-            Items = LogItemsList.GetData();
+            Items = LogItemsList.Load();
         }
 
         void CreateTempList() {
@@ -98,7 +98,7 @@ namespace BookLib {
         }
 
         public void Save() {
-            LogItemsList.SaveData(Items);
+            LogItemsList.Save(Items);
         }
 
         /// <summary>

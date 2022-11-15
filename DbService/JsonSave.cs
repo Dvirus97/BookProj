@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System.IO;
 
 namespace DbService {
     public class JsonSave<T> {
@@ -13,13 +14,16 @@ namespace DbService {
         public JsonSave(string fileName) {
             if (string.IsNullOrWhiteSpace(fileName)) {
                 string text = $"{DateTime.Now} \nfile name is empty\n";
-                TextSave.Log(text, true);
+                TextSave.Save(text, true);
                 throw new ArgumentNullException("file name was null");
             }
             filePath = Environment.CurrentDirectory + "/" + fileName;
+            if (!File.Exists(filePath)) {
+                using FileStream fs = new FileStream(filePath, FileMode.Create);
+            }
         }
 
-        public void SaveData(object data, bool append = false) {
+        public void Save(object data, bool append = false) {
             var setting = new JsonSerializerSettings() {
                 TypeNameHandling = TypeNameHandling.Auto,
                 NullValueHandling = NullValueHandling.Ignore
@@ -34,7 +38,7 @@ namespace DbService {
             }
         }
 
-        public List<T> GetData() {
+        public List<T> Load() {
             var setting = new JsonSerializerSettings() {
                 TypeNameHandling = TypeNameHandling.Auto,
                 NullValueHandling = NullValueHandling.Ignore

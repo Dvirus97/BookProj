@@ -28,11 +28,11 @@ namespace BookLib {
         }
 
         public void Save() {
-            LogTransactionsList.SaveData(AllTransactions);
+            LogTransactionsList.Save(AllTransactions);
         }
 
         public void Load() {
-            AllTransactions = LogTransactionsList.GetData();
+            AllTransactions = LogTransactionsList.Load();
         }
 
         public List<Transaction> FilterTransactions(DateTime FromDate, DateTime tillDate, Predicate<Transaction> byItem) {

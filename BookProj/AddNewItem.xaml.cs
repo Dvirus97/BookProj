@@ -40,10 +40,10 @@ namespace BookProj {
 
                 switch (type) {
                     case ItemType.Book:
-                        Store.Instace?.Add(NewBook());
+                        Store.Instace?.Add(NewItem<Book>());
                         break;
                     case ItemType.Journal:
-                        Store.Instace?.Add(NewJournal());
+                        Store.Instace?.Add(NewItem<Journal>());
                         break;
                     default:
                         break;
@@ -60,15 +60,15 @@ namespace BookProj {
                 screenTbl.Content = $"{ex.Message} \n {ex.FailedProp}";
 
                 string text = $"{DateTime.Now} \n{ex.Message} => {ex.FailedProp}\n";
-                Store.Instace.LogError.Log(text, true);
+                Store.Instace.LogError.Save(text, true);
             }
             catch (ArgumentNullException ex) {
                 MessageBox.Show(ex.Message);
             }
         }
 
-        Book NewBook() {
-            Book book = new Book() {
+        T NewItem<T>() where T : Item, new() {
+            T item = new() {
                 Author = MyValidation.ValidString(authorITC.InputTbx.Text, "Autor"),
                 Edition = MyValidation.ValidInt(editionITC.InputTbx.Text, "Edition"),
                 Publisher = MyValidation.ValidString(publisherITC.InputTbx.Text, "Publisher"),
@@ -78,30 +78,11 @@ namespace BookProj {
                 Genre = (Genre)Enum.Parse(typeof(Genre), genreCbx.Text),
                 PublishDate = MyValidation.ValidDate(PublishDateDP.SelectedDate, "publish Date"),
             };
-            if (photoPath is not null) {
-                book.PhotoPath = photoPath;
+            if (!string.IsNullOrWhiteSpace(photoPath)) {
+                item.PhotoPath = photoPath;
             }
-            return book;
+            return item;
         }
-
-        Journal NewJournal() {
-            Journal journal = new Journal() {
-                Author = MyValidation.ValidString(authorITC.InputTbx.Text, "Autor"),
-                Edition = MyValidation.ValidInt(editionITC.InputTbx.Text, "Edition"),
-                Publisher = MyValidation.ValidString(publisherITC.InputTbx.Text, "Publisher"),
-                Name = MyValidation.ValidString(nameITC.InputTbx.Text, "Name"),
-                Price = MyValidation.ValidDouble(priceITC.InputTbx.Text, "Price"),
-                Amount = MyValidation.ValidInt(quantityITC.InputTbx.Text, "Quantity"),
-                Genre = (Genre)Enum.Parse(typeof(Genre), genreCbx.Text),
-                PublishDate = MyValidation.ValidDate(PublishDateDP.SelectedDate, "publish Date"),
-                PhotoPath = photoPath is not null ? photoPath : ""
-            };
-            if (photoPath is not null) {
-                journal.PhotoPath = photoPath;
-            }
-            return journal;
-        }
-
         private void UploadPhotoBtn_Click(object sender, RoutedEventArgs e) {
             Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
             dlg.CheckFileExists = true;

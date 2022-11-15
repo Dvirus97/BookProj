@@ -25,6 +25,7 @@ namespace BookProj {
         private readonly HomeWin? homeWin;
         Predicate<Item>? predicate;
         Item? selectedItem;
+        private RadioButton? radioButton;
 
         public HomePage() {
             InitializeComponent();
@@ -43,7 +44,6 @@ namespace BookProj {
                 default:
             }
             predicate = x => true;
-            filter = Store.Instace.FilterList(predicate);
             ResetView();
             SetFilterButtons();
             listView.ItemsSource = filter;
@@ -162,5 +162,34 @@ namespace BookProj {
             HomeWin.MainFrame.Content = new ReportPage();
         }
 
+
+        private void SearchTbx_TextChanged(object sender, TextChangedEventArgs e) {
+            if (this.radioButton is null) return;
+            string text = SearchTbx.Text.ToLower().Trim();
+            if (radioButton.Content.Equals("Author")) {
+                predicate = (x => {
+                    if (string.IsNullOrEmpty(x.Author)) return false;
+                    else return x.Author.ToLower().StartsWith(text);
+                });
+            }
+            if (radioButton.Content.Equals("Publisher")) {
+                predicate = (x => {
+                    if (string.IsNullOrEmpty(x.Author)) return false;
+                    else return x.Publisher is not null && x.Publisher.ToLower().StartsWith(text);
+                });
+            }
+            if (radioButton.Content.Equals("Name")) {
+                predicate = (x => {
+                    if (string.IsNullOrEmpty(x.Name)) return false;
+                    else return x.Name is not null && x.Name.ToLower().StartsWith(text);
+                });
+            }
+            ResetView();
+        }
+
+        private void RadioButton_Checked(object sender, RoutedEventArgs e) {
+            if (sender is not RadioButton rb) return;
+            this.radioButton = rb;
+        }
     }
 }

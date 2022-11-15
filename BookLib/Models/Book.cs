@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace BookLib.Models {
     public class Book : Item {
-   
+
+        public Book() : base() {
+            PhotoPath = @"C:\Users\klik5\Documents\Sela-סלע\FinalProject\Other\BookProj\BookProj\assets\book.png";
+        }
     }
 }

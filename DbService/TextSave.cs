@@ -19,11 +19,11 @@ namespace DbService {
                 path = Environment.CurrentDirectory + "/" + fileName;
 
             if (!File.Exists(path)) {
-                using (FileStream fs = new FileStream(path, FileMode.Create)) { }
+                using FileStream fs = new(path, FileMode.Create);
             }
         }
 
-        public void Log(string text, bool append = false) {
+        public void Save(string text, bool append = false) {
             using (StreamWriter sw = new StreamWriter(path, append)) {
                 sw.WriteLine(text);
             }

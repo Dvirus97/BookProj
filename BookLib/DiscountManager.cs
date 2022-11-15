@@ -40,10 +40,10 @@ namespace BookLib {
         }
 
         public void Save() {
-            LogDiscountsList.SaveData(AllDiscounts);
+            LogDiscountsList.Save(AllDiscounts);
         }
         public void Load() {
-            AllDiscounts = new ObservableCollection<Discount>(LogDiscountsList.GetData());
+            AllDiscounts = new ObservableCollection<Discount>(LogDiscountsList.Load());
         }
     }
 }

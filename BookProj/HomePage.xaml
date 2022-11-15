@@ -44,7 +44,7 @@
                 CornerRadius="8">
                 <StackPanel Grid.Column="0" VerticalAlignment="Center">
 
-                    <Label Content="Sort By" FontSize="12" />
+                    <Label Content="Filter By" FontSize="12" />
                     <UC:MyButton
                         x:Name="showAllBtn"
                         Margin="5"
@@ -69,6 +69,34 @@
             </Border>
 
             <Border
+                Margin="5"
+                VerticalAlignment="Bottom"
+                Background="#FFE0EEF6"
+                BorderThickness="1"
+                CornerRadius="8">
+                <StackPanel Grid.Column="0" VerticalAlignment="Center">
+
+                    <Label Content="Search" FontSize="12" />
+                    <RadioButton
+                        Checked="RadioButton_Checked"
+                        Content="Author"
+                        GroupName="filterText" />
+                    <RadioButton
+                        Checked="RadioButton_Checked"
+                        Content="Name"
+                        GroupName="filterText" />
+                    <RadioButton
+                        Checked="RadioButton_Checked"
+                        Content="Publisher"
+                        GroupName="filterText" />
+                    <TextBox
+                        Name="SearchTbx"
+                        Margin="5"
+                        TextChanged="SearchTbx_TextChanged" />
+                </StackPanel>
+            </Border>
+
+            <Border
                 Grid.Column="1"
                 Margin="5"
                 Background="#FFE0EEF6"
@@ -77,6 +105,7 @@
                 <ListView
                     x:Name="listView"
                     Margin="5"
+                    MinWidth="400"
                     Background="#FFE0EEF6"
                     BorderBrush="Transparent"
                     ItemsSource="{Binding filter}"
@@ -115,13 +144,11 @@
                                             Click="MinusBtn_click"
                                             Content="&#xE738;"
                                             FontFamily="Segoe MDL2 Assets"
-                                            FontSize="15"
-                                            />
+                                            FontSize="15" />
                                         <TextBlock
                                             Margin="5"
                                             FontSize="12"
-                                            Text="{Binding ShopCount}"
-                                            />
+                                            Text="{Binding ShopCount}" />
                                         <Button
                                             Width="20"
                                             Height="20"
@@ -131,8 +158,7 @@
                                             Click="PlusBtn_click"
                                             Content="&#xE710;"
                                             FontFamily="Segoe MDL2 Assets"
-                                            FontSize="15"
-                                            />
+                                            FontSize="15" />
                                     </StackPanel>
                                 </Label>
                             </Grid>

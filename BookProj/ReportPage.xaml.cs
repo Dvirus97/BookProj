@@ -92,7 +92,7 @@ namespace BookProj {
                 text.AppendLine(t.ToString() + "\n");
             }
 
-            LogFilterTransaction.Log(text.ToString(), false);
+            LogFilterTransaction.Save(text.ToString(), false);
             MessageBox.Show("log saved! Opening File...");
 
             new Process {

@@ -36,7 +36,7 @@ namespace BookLib.Models {
         /// counter for shopping cart
         /// </summary>
         public int ShopCount { get; set; }
-        public virtual string? PhotoPath { get; set; }
+        public string? PhotoPath { get; set; }
 
         /// <summary>
         /// the biggest discount from this.DiscountList  type:Discount
