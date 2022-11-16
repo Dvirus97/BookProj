@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.PortableExecutable;
 using System.Text;
 using System.Threading.Tasks;
 using BookLib.Enums;
@@ -115,6 +116,6 @@ namespace BookLib.Models {
         /// <summary>
         /// main details ot show
         /// </summary>
-        public string HeadDetail { get => $"name: {Name}, price: {Price:c}, discount: {Discount}%"; }
+        public string ShowDetail { get => $"name: {Name}, price: {Price:c}, discount: {Discount}%"; }
     }
 }

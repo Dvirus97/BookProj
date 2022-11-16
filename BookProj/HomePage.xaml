@@ -27,74 +27,72 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <Border
-                Grid.Column="2"
-                Margin="5"
-                Background="#FFE0EEF6"
-                BorderThickness="1"
-                CornerRadius="8" />
 
 
 
-            <Border
-                Margin="5"
-                VerticalAlignment="Top"
-                Background="#FFE0EEF6"
-                BorderThickness="1"
-                CornerRadius="8">
-                <StackPanel Grid.Column="0" VerticalAlignment="Center">
+            <StackPanel>
+                <Border
+                    Margin="5"
+                    VerticalAlignment="Top"
+                    Background="#FFE0EEF6"
+                    BorderThickness="1"
+                    CornerRadius="8">
+                    <StackPanel Grid.Column="0" VerticalAlignment="Center">
 
-                    <Label Content="Filter By" FontSize="12" />
-                    <UC:MyButton
-                        x:Name="showAllBtn"
-                        Margin="5"
-                        Click="FilterBtn_Click"
-                        Text="Show All" />
-                    <UC:MyButton
-                        x:Name="showBooksBtn"
-                        Margin="5"
-                        Click="FilterBtn_Click"
-                        Text="show books" />
-                    <UC:MyButton
-                        x:Name="showJournalsBtn"
-                        Margin="5"
-                        Click="FilterBtn_Click"
-                        Text="show journals" />
-                    <UC:MyButton
-                        x:Name="showDiscountBtn"
-                        Margin="5"
-                        Click="FilterBtn_Click"
-                        Text="show discount" />
-                </StackPanel>
-            </Border>
+                        <Label Content="Filter By" FontSize="12" />
+                        <UC:MyButton
+                            x:Name="showAllBtn"
+                            Margin="5"
+                            Click="FilterBtn_Click"
+                            Text="Show All" />
+                        <UC:MyButton
+                            x:Name="showBooksBtn"
+                            Margin="5"
+                            Click="FilterBtn_Click"
+                            Text="show books" />
+                        <UC:MyButton
+                            x:Name="showJournalsBtn"
+                            Margin="5"
+                            Click="FilterBtn_Click"
+                            Text="show journals" />
+                        <UC:MyButton
+                            x:Name="showDiscountBtn"
+                            Margin="5"
+                            Click="FilterBtn_Click"
+                            Text="show discount" />
+                    </StackPanel>
+                </Border>
 
-            <Border
-                Margin="5"
-                VerticalAlignment="Bottom"
-                Background="#FFE0EEF6"
-                BorderThickness="1"
-                CornerRadius="8">
-                <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                <Border
+                    Margin="5"
+                    VerticalAlignment="Bottom"
+                    Background="#FFE0EEF6"
+                    BorderThickness="1"
+                    CornerRadius="8">
+                    <StackPanel Grid.Column="0" VerticalAlignment="Center">
 
-                    <Label Content="Search" FontSize="12" />
-                    <RadioButton
-                        Checked="RadioButton_Checked"
-                        Content="Author"
-                        GroupName="filterText" />
-                    <RadioButton
-                        Checked="RadioButton_Checked"
-                        Content="Name"
-                        GroupName="filterText" />
-                    <RadioButton
-                        Checked="RadioButton_Checked"
-                        Content="Publisher"
-                        GroupName="filterText" />
-                    <TextBox
-                        Name="SearchTbx"
-                        Margin="5"
-                        TextChanged="SearchTbx_TextChanged" />
-                </StackPanel>
-            </Border>
+                        <Label Content="Search" FontSize="12" />
+                        <RadioButton
+                            Checked="RadioButton_Checked"
+                            Content="Name"
+                            GroupName="filterText"
+                            IsChecked="True" />
+                        <RadioButton
+                            Checked="RadioButton_Checked"
+                            Content="Author"
+                            GroupName="filterText" />
+                        <RadioButton
+                            Checked="RadioButton_Checked"
+                            Content="Publisher"
+                            GroupName="filterText" />
+                        <TextBox
+                            Name="SearchTbx"
+                            Margin="5"
+                            TextChanged="SearchTbx_TextChanged" />
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+
 
             <Border
                 Grid.Column="1"
@@ -104,8 +102,8 @@
                 CornerRadius="8">
                 <ListView
                     x:Name="listView"
-                    Margin="5"
                     MinWidth="400"
+                    Margin="5"
                     Background="#FFE0EEF6"
                     BorderBrush="Transparent"
                     ItemsSource="{Binding filter}"
@@ -126,7 +124,7 @@
                                 <TextBlock
                                     Grid.Column="1"
                                     VerticalAlignment="Center"
-                                    Text="{Binding HeadDetail}"
+                                    Text="{Binding ShowDetail}"
                                     TextWrapping="WrapWithOverflow" />
 
                                 <Label
@@ -169,6 +167,13 @@
 
             <Border
                 Grid.Column="2"
+                Margin="5"
+                Background="#FFE0EEF6"
+                BorderThickness="1"
+                CornerRadius="8" />
+
+            <Border
+                Grid.Column="2"
                 Margin="20"
                 VerticalAlignment="Top"
                 Background="White"
@@ -184,16 +189,11 @@
                 HorizontalAlignment="Center"
                 VerticalAlignment="Bottom"
                 Orientation="Horizontal">
-                <StackPanel Orientation="Horizontal">
-
-                    <UC:MyButton
-                        Width="70"
-                        Margin="5"
-                        Click="SellBtn_Click"
-                        Text="Sell" />
-                </StackPanel>
-
-
+                <UC:MyButton
+                    Width="70"
+                    Margin="5"
+                    Click="SellBtn_Click"
+                    Text="Sell" />
             </StackPanel>
         </Grid>
 

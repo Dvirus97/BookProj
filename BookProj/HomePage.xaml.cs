@@ -59,11 +59,19 @@ namespace BookProj {
         public void ResetView() {
             if (predicate is null) return;
 
+
             List<Item>? temp = Store.Instace?.FilterList(predicate);
-            if (temp is not null)
-                filter = temp;
-            listView.ItemsSource = filter;
-            DateilsLbl.Content = selectedItem?.ToString();
+            if (temp is null) return;
+            filter = temp;
+            if (filter.Count <= 0) {
+                listView.ItemsSource = null;
+                DateilsLbl.Content = "There is not result";
+            }
+            else {
+                listView.ItemsSource = filter;
+                DateilsLbl.Content = selectedItem?.ToString() ?? "Details";
+            }
+            selectedItem = null;
         }
 
         private void listView_SelectionChanged(object sender, SelectionChangedEventArgs e) {
@@ -166,23 +174,28 @@ namespace BookProj {
         private void SearchTbx_TextChanged(object sender, TextChangedEventArgs e) {
             if (this.radioButton is null) return;
             string text = SearchTbx.Text.ToLower().Trim();
-            if (radioButton.Content.Equals("Author")) {
-                predicate = (x => {
-                    if (string.IsNullOrEmpty(x.Author)) return false;
-                    else return x.Author.ToLower().StartsWith(text);
-                });
-            }
-            if (radioButton.Content.Equals("Publisher")) {
-                predicate = (x => {
-                    if (string.IsNullOrEmpty(x.Author)) return false;
-                    else return x.Publisher is not null && x.Publisher.ToLower().StartsWith(text);
-                });
-            }
-            if (radioButton.Content.Equals("Name")) {
-                predicate = (x => {
-                    if (string.IsNullOrEmpty(x.Name)) return false;
-                    else return x.Name is not null && x.Name.ToLower().StartsWith(text);
-                });
+            string? radioText = radioButton.Content.ToString();
+            switch (radioText) {
+                case "Author":
+                    predicate = (x => {
+                        if (string.IsNullOrEmpty(x.Author)) return false;
+                        else return x.Author.ToLower().StartsWith(text);
+                    });
+                    break;
+                case "Publisher":
+                    predicate = (x => {
+                        if (string.IsNullOrEmpty(x.Author)) return false;
+                        else return x.Publisher is not null && x.Publisher.ToLower().StartsWith(text);
+                    });
+                    break;
+                case "Name":
+                    predicate = (x => {
+                        if (string.IsNullOrEmpty(x.Name)) return false;
+                        else return x.Name is not null && x.Name.ToLower().StartsWith(text);
+                    });
+                    break;
+                default:
+                    break;
             }
             ResetView();
         }
