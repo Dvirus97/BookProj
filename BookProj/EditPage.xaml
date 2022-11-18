@@ -42,5 +42,6 @@
                 CanUserAddRows="False"
                 SelectionUnit="CellOrRowHeader" />
         </StackPanel>
+        <!--  CellEditEnding="DataGrid_onCellEditEnd"  -->
     </Grid>
 </Page>

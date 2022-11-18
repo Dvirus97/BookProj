@@ -45,7 +45,7 @@ namespace DbService {
             };
 
             if (!File.Exists(filePath)) {
-                using (FileStream fs = new FileStream(filePath, FileMode.Create)) { }
+                using FileStream fs = new FileStream(filePath, FileMode.Create);
             }
             string text = File.ReadAllText(filePath);
             var list = JsonConvert.DeserializeObject<List<T>>(text, setting);

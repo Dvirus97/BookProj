@@ -26,12 +26,23 @@ namespace BookProj {
         }
         public EditPage(HomePage homePage) : this() {
             this.homePage = homePage;
-            dataGrid.ItemsSource = Store.Instace.Items;
+            try {
+                dataGrid.ItemsSource = Store.Instace.Items;
+            }
+            catch (Exception ex) {
+                MessageBox.Show(ex.Message);
+                Store.Instace.LogError.Save(DateTime.Now + "\n" + ex.Message + "\n", true);
+            }
         }
 
         private void SaveBtn_Click(object sender, RoutedEventArgs e) {
             Store.Instace?.Save();
             homePage?.ResetView();
         }
+
+        //private void DataGrid_onCellEditEnd(object sender, DataGridCellEditEndingEventArgs e) {
+        //    //MessageBox.Show("cell change save");
+        //    //Store.Instace?.Save();
+        //}
     }
 }

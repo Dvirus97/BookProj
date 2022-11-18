@@ -16,6 +16,8 @@ namespace BookLib.Models {
         public InvalidInputException(string? message) : base(message) { }
         public InvalidInputException(string? message, string failedProp) : base(message) {
             FailedProp = failedProp;
+            string text = $"{DateTime.Now} \n{this.Message} => {this.FailedProp}\n";
+            Store.Instace.LogError.Save(text, true);
         }
     }
 }

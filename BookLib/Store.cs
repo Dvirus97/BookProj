@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.ObjectModel;
 using System.Data.SqlTypes;
 using System.Globalization;
+using System.Security.Cryptography;
 
 namespace BookLib {
     public class Store {
@@ -37,42 +38,9 @@ namespace BookLib {
         #endregion
 
         #region author/ name/ publisher lists - convert props from all items to list
-        public List<string> AllAuthor {
-            get {
-                List<string> temp = new List<string>();
-                foreach (var item in Items) {
-                    if (item is null || item.Author is null) throw new ArgumentNullException();
-                    if (!temp.Contains(item.Author)) {
-                        temp.Add(item.Author);
-                    }
-                }
-                return temp;
-            }
-        }
-        public List<string> AllName {
-            get {
-                List<string> temp = new List<string>();
-                foreach (var item in Items) {
-                    if (item is null || item.Name is null) throw new ArgumentNullException();
-                    if (!temp.Contains(item.Name)) {
-                        temp.Add(item.Name);
-                    }
-                }
-                return temp;
-            }
-        }
-        public List<string> AllPublisher {
-            get {
-                List<string> temp = new List<string>();
-                foreach (var item in Items) {
-                    if (item is null || item.Publisher is null) throw new ArgumentNullException();
-                    if (!temp.Contains(item.Publisher)) {
-                        temp.Add(item.Publisher);
-                    }
-                }
-                return temp;
-            }
-        }
+        public List<string?> AllAuthor => Items.Select(x => x.Author).Distinct().ToList();
+        public List<string?> AllName => Items.Select(x => x.Name).Distinct().ToList();
+        public List<string?> AllPublisher => Items.Select(x => x.Publisher).Distinct().ToList();
         #endregion
 
         /// <summary>
@@ -83,8 +51,14 @@ namespace BookLib {
         private Store() {
             //CreateTempList();
             Items = LogItemsList.Load();
+            if (Items.Count <= 0) {
+                CreateTempList();
+            }
         }
 
+        /// <summary>
+        /// basic first time list of items. if data load return empty.
+        /// </summary>
         void CreateTempList() {
             Add(new Book() { Name = "Dvir", Author = "aaa", Publisher = "zzz", Edition = 3, Amount = 7, Price = 30, });
             Add(new Book() { Name = "Berta", Author = "bbb", Publisher = "xxx", Edition = 1, Amount = 8, Price = 40, });

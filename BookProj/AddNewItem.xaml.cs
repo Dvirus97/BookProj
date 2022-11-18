@@ -58,9 +58,6 @@ namespace BookProj {
             }
             catch (InvalidInputException ex) {
                 screenTbl.Content = $"{ex.Message} \n {ex.FailedProp}";
-
-                string text = $"{DateTime.Now} \n{ex.Message} => {ex.FailedProp}\n";
-                Store.Instace.LogError.Save(text, true);
             }
             catch (ArgumentNullException ex) {
                 MessageBox.Show(ex.Message);

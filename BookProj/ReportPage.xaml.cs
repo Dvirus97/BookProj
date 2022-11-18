@@ -74,7 +74,7 @@ namespace BookProj {
             //nameSpnl.Visibility = Visibility.Visible;
 
             nameCmb.ItemsSource = selectedEnum switch {
-                FilterBy.All => new string[1] { "All" },//nameSpnl.Visibility = Visibility.Collapsed;
+                FilterBy.All => new string[1] { "All" },
                 FilterBy.Name => Store.Instace.AllName,
                 FilterBy.Author => Store.Instace.AllAuthor,
                 FilterBy.Publisher => Store.Instace.AllPublisher,
