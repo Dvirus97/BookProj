@@ -64,9 +64,9 @@ namespace BookProj {
             };
 
             filterList = TransactionManager.Instance.FilterTransactions(fromDate, tillDate, predicate);
-            if (filterList is not null) {
-                listView.ItemsSource = filterList;
-            }
+            if (filterList is null) return;
+
+            listView.ItemsSource = filterList.Count > 0 ? filterList : new string[] { "there are no results" };
         }
 
         private void ByCmb_SelectionChanged(object sender, SelectionChangedEventArgs e) {
